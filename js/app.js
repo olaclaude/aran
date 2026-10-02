@@ -1,11 +1,12 @@
 /* Val d'Aran en calma — configuración y comportamiento */
 const CONFIG = {
   // OPCIÓN A (recomendada): enlace de tu formulario de Google con subida de archivos.
-  // Crear en forms.google.com → Enviar → enlace. Ver README, paso 4.
+  // Crear en forms.google.com → Enviar → enlace. Ver README.
   photosFormUrl: "",
 
   // OPCIÓN B (avanzada): URL de una app web de Google Apps Script que sube las fotos
   // directamente a una carpeta de Drive. Ver apps-script/Code.gs y el README.
+  // Si la URL es pública desde GitHub Pages, usa mode:"no-cors" en uploadPhoto().
   photoUploadApi: "",
 
   // Carpeta de Drive compartida que veréis los dos (enlace normal, no de edición).
@@ -22,14 +23,15 @@ const CONFIG = {
       details: "Plan des Artiguetes (12 km de pista desde Pont d'Arròs). Paseo 1,2 km. Tarde en Vielha; cena Sidreria Era Bruisha (reserva).",
       location: "Plan des Artiguetes / Vielha" },
     { n: 4, start: "20261008", end: "20261009", title: "Bassa d'Oles, Bagergue y Garòs",
-      details: "Parking Bassa d'Oles desde Gausac. Circular 1,2 km llano. Plan completo o relajado (Bassа + solo Bagergue).",
+      details: "Parking Bassa d'Oles desde Gausac. Circular 1,2 km llano. Plan completo o relajado (Bassa + solo Bagergue).",
       location: "Bassa d'Oles / Bagergue" },
   ],
 };
 
 function wireUploads() {
-  const hasApi = !!CONFIG.photoUploadApi;
+  const hasApi  = !!CONFIG.photoUploadApi;
   const hasForm = !!CONFIG.photosFormUrl;
+
   document.querySelectorAll("[data-upload]").forEach((el) => {
     if (hasApi) {
       el.setAttribute("href", "#");
@@ -37,25 +39,54 @@ function wireUploads() {
     } else if (hasForm) {
       el.setAttribute("href", CONFIG.photosFormUrl);
       el.setAttribute("target", "_blank");
-      el.setAttribute("rel", "noopener");
+      el.setAttribute("rel", "noopener noreferrer");
     } else {
       el.setAttribute("href", "#como");
       el.setAttribute("title", "Falta configurar el formulario de fotos (ver README)");
       el.classList.add("needs-config");
     }
   });
+
+  // Enlace "Ver carpeta de Drive"
+  document.querySelectorAll("[data-drive]").forEach((el) => {
+    if (CONFIG.driveFolderUrl) {
+      el.setAttribute("href", CONFIG.driveFolderUrl);
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener noreferrer");
+    } else {
+      el.setAttribute("href", "#como");
+      el.setAttribute("title", "Configura driveFolderUrl en js/app.js");
+      el.classList.add("needs-config");
+    }
+  });
+
   if (!hasApi && !hasForm) showConfigBanner();
 }
 
 function showConfigBanner() {
   const b = document.createElement("div");
-  b.style.cssText =
-    "position:fixed;left:12px;bottom:12px;z-index:99;background:#123a2c;color:#fff;" +
-    "padding:10px 16px;border-radius:12px;font-size:.85rem;box-shadow:0 4px 14px rgba(0,0,0,.3);max-width:320px";
+  b.className = "config-banner";
   b.innerHTML =
-    '📷 Falta el enlace del formulario de fotos.<br>Pégalo en <code>js/app.js</code> → <code>photosFormUrl</code> (ver README). ' +
-    '<a href="#" style="color:#f5c48a" onclick="this.closest(\'div\').remove();return false">✕</a>';
+    '📷 Falta el enlace del formulario de fotos. ' +
+    'Pégalo en <code>js/app.js</code> → <code>photosFormUrl</code> (ver README). ';
+  const close = document.createElement("a");
+  close.href = "#";
+  close.textContent = "✕";
+  close.setAttribute("aria-label", "Cerrar aviso");
+  close.addEventListener("click", (ev) => { ev.preventDefault(); b.remove(); });
+  b.appendChild(close);
   document.body.appendChild(b);
+}
+
+function askDay(defaultDay = "1") {
+  for (let i = 0; i < 3; i++) {
+    const raw = prompt("¿Qué día es? (1, 2, 3 o 4)", String(defaultDay));
+    if (raw === null) return null; // cancelado
+    const d = raw.trim();
+    if (/^[1-4]$/.test(d)) return d;
+    alert("Día inválido. Escribe 1, 2, 3 o 4.");
+  }
+  return null;
 }
 
 function pickAndUpload() {
@@ -64,32 +95,62 @@ function pickAndUpload() {
   input.accept = "image/*";
   input.multiple = true;
   input.onchange = async () => {
-    for (const file of input.files) {
-      const day = prompt("¿Qué día es? (1, 2, 3 o 4)", "1") || "1";
-      await uploadPhoto(file, day);
+    const files = [...input.files];
+    if (!files.length) return;
+
+    const day = askDay("1");
+    if (day === null) return;
+
+    const ok = [];
+    const failed = [];
+    for (const file of files) {
+      try {
+        await uploadPhoto(file, day);
+        ok.push(file.name);
+      } catch (err) {
+        console.error(err);
+        failed.push(file.name);
+      }
     }
-    alert("¡Fotos subidas! Ya las veréis los dos en Drive.");
+
+    if (failed.length === 0) {
+      alert(`¡${ok.length} foto${ok.length === 1 ? "" : "s"} subida${ok.length === 1 ? "" : "s"} del día ${day}! Ya las veréis los dos en Drive.`);
+    } else {
+      alert(`Subidas con éxito: ${ok.length}\nFallaron: ${failed.join(", ")}\nRevisa la conexión e inténtalo de nuevo.`);
+    }
   };
   input.click();
 }
 
 async function uploadPhoto(file, day) {
+  const MAX_BYTES = 10 * 1024 * 1024; // 10 MB
+  if (file.size > MAX_BYTES) throw new Error(file.name + " pesa más de 10 MB");
+  if (!/^image\//.test(file.type))    throw new Error(file.name + " no es una imagen");
+
   const dataUrl = await new Promise((res, rej) => {
     const r = new FileReader();
     r.onload = () => res(r.result);
-    r.onerror = rej;
+    r.onerror = () => rej(new Error("No se pudo leer " + file.name));
     r.readAsDataURL(file);
   });
+
+  const safeName = file.name.replace(/[^\w.\-]/g, "_");
   const payload = {
-    image: dataUrl.split(",")[1],
+    image:       dataUrl.split(",")[1],
     contentType: file.type,
-    name: `dia${day}-${Date.now()}-${file.name.replace(/[^\w.\-]/g, "_")}`,
+    name:        `dia${day}-${Date.now()}-${safeName}`,
   };
+
+  // no-cors porque Apps Script no responde preflight OPTIONS desde GitHub Pages.
+  // Contra: no podemos leer la respuesta; asumimos éxito si no hay error de red.
   const r = await fetch(CONFIG.photoUploadApi, {
     method: "POST",
+    mode: "no-cors",
     body: JSON.stringify(payload),
   });
-  if (!r.ok) throw new Error("Error al subir " + file.name);
+  // con mode:"no-cors" r.ok y r.status no son fiables (cors response); cualquier
+  // error de red lanza una excepción antes de llegar aquí.
+  return r;
 }
 
 function wireCalendar() {
@@ -98,19 +159,24 @@ function wireCalendar() {
     if (!day) return;
     const url =
       "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-      "&text=" + encodeURIComponent(`Val d'Aran · Día ${day.n}: ${day.title}`) +
-      "&dates=" + day.start + "/" + day.end +
-      "&details=" + encodeURIComponent(day.details) +
+      "&text="     + encodeURIComponent(`Val d'Aran · Día ${day.n}: ${day.title}`) +
+      "&dates="    + day.start + "/" + day.end +
+      "&details="  + encodeURIComponent(day.details) +
       "&location=" + encodeURIComponent(day.location);
     el.setAttribute("href", url);
     el.setAttribute("target", "_blank");
-    el.setAttribute("rel", "noopener");
+    el.setAttribute("rel", "noopener noreferrer");
   });
 }
 
 function wireNav() {
   const links = [...document.querySelectorAll("nav.toc a")];
-  const map = new Map(links.map((a) => [a.getAttribute("href").slice(1), a]));
+  if (!links.length) return;
+  const map = new Map();
+  links.forEach((a) => {
+    const href = a.getAttribute("href") || "";
+    if (href.startsWith("#")) map.set(href.slice(1), a);
+  });
   const obs = new IntersectionObserver(
     (entries) => {
       entries.forEach((e) => {
@@ -126,7 +192,22 @@ function wireNav() {
   document.querySelectorAll("section[id]").forEach((s) => obs.observe(s));
 }
 
+function injectBannerStyles() {
+  if (document.querySelector("style[data-banner]")) return;
+  const s = document.createElement("style");
+  s.dataset.banner = "1";
+  s.textContent =
+    ".config-banner{position:fixed;left:12px;bottom:12px;z-index:99;background:#123a2c;color:#fff;" +
+    "padding:10px 38px 10px 16px;border-radius:12px;font-size:.85rem;" +
+    "box-shadow:0 4px 14px rgba(0,0,0,.3);max-width:340px;line-height:1.4}" +
+    ".config-banner code{background:rgba(255,255,255,.12);padding:.05rem .3rem;border-radius:4px}" +
+    ".config-banner a{position:absolute;top:6px;right:8px;color:#f5c48a;text-decoration:none;" +
+    "padding:4px 8px;font-size:1rem;line-height:1}";
+  document.head.appendChild(s);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
+  injectBannerStyles();
   wireUploads();
   wireCalendar();
   wireNav();

@@ -5,9 +5,6 @@ rutas cortas y llanas, enlaces directos de coche y senderismo, aparcamientos,
 cenas, plan B y una web para que **tú y Mariina subáis las fotos del día a la
 misma carpeta de Drive**.
 
-Incluye además la **presentación** (`presentacion/Val_dAran_5-9_octubre.pptx`),
-13 diapositivas con los mismos enlaces y códigos QR.
-
 ---
 
 ## 📁 Estructura del repo
@@ -18,44 +15,55 @@ val-daran-viaje/
 ├── css/styles.css          # estilos
 ├── js/app.js               # ← CONFIGURACIÓN (fotos, calendario)
 ├── assets/
-│   ├── photos/             # fotos de cada día (14)
+│   ├── photos/             # tus fotos de cada día (sustituir los placeholders)
 │   └── maps/               # mapas SVG: general + día 1–4
-├── presentacion/
-│   └── Val_dAran_5-9_octubre.pptx
+├── presentacion/           # espacio para la presentación .pptx
 ├── apps-script/
-│   └── Code.gs             # subida directa a Drive (opción avanzada)
+│   └── Code.gs             # subida directa a Drive (Opción B)
 └── README.md
 ```
 
-## 🚀 1. Crear el repositorio en GitHub y subir el proyecto
+## 🚀 1. Publicar la web (GitHub Pages)
 
-El proyecto está preparado para publicarse como sitio estático.
+En el repo de GitHub: **Settings → Pages → Source: Deploy from a branch**.
+Rama `main`, carpeta `/ (root)` → **Save**. En un minuto la web estará en
+`https://<tu-usuario>.github.io/aran/`.
 
-## 🌐 2. Publicar la web (GitHub Pages)
+## 📷 2. Fotos del día en Drive compartido
 
-En el repo: **Settings → Pages → Source: Deploy from a branch**.
-Rama `main`, carpeta `/ (root)` → **Save**.
+La web está preparada para dos opciones:
 
-## 📷 3. Fotos del día en Drive compartido
+- **Opción A (recomendada):** crea un formulario en `forms.google.com` que
+  acepte subida de archivos y pega su enlace en `js/app.js` →
+  `photosFormUrl`. Fácil y seguro.
+- **Opción B (avanzada):** despliega `apps-script/Code.gs` como app web
+  (ejecutar como *Yo*, acceso *Cualquier usuario*), pon un SECRET y pega la
+  URL `/exec?key=TU_SECRETO` en `js/app.js` → `photoUploadApi`. Sube cada
+  foto directamente a una subcarpeta por día (`dia-1`, `dia-2`…).
 
-La web admite un formulario de Google o una app web de Apps Script para que las fotos de los dos acaben en la misma carpeta de Drive.
+En cualquier caso, pega el enlace público de la carpeta de Drive en
+`driveFolderUrl` para que el botón "Ver carpeta de Drive" funcione.
 
-Configura `photosFormUrl`, `photoUploadApi` y `driveFolderUrl` en `js/app.js`.
+Mientras no configures nada, la web muestra un aviso en la esquina inferior
+y los botones llevan a la sección de ayuda; no hay errores.
 
-## 📅 4. Añadir al calendario
+## 📅 3. Añadir al calendario
 
-Los botones de cada día generan eventos para Google Calendar.
+Cada día tiene un botón 📅 que abre Google Calendar con el evento
+pre-rellenado (fechas, título, ubicación y detalles).
 
-## 🖼 5. Presentación (PPTX)
+## 🖼 4. Fotos
 
-`presentacion/Val_dAran_5-9_octubre.pptx` — presentación de la guía del viaje.
+Sustituye los placeholders de colores de cada día en `index.html` por una
+imagen real en `assets/photos/` (p. ej. `assets/photos/dia1.jpg`). Hay una
+regla preparada en `css/styles.css` para que se vean bien cubriendo el
+hueco (object-fit: cover).
 
-## 🛠 6. Cómo editar la web
+## 🛠 5. Cómo editar la web
 
 - **Textos y fotos**: `index.html`.
-- **Enlace de fotos / eventos**: `js/app.js`, objeto `CONFIG`.
-- **Colores**: variables en `css/styles.css`.
-- **Fotos nuevas**: súbelas a `assets/photos/`.
+- **Fechas, enlaces y destinos**: `js/app.js`, objeto `CONFIG`.
+- **Colores**: variables `--moss`, `--ochre`, `--cream`… al principio de `css/styles.css`.
 
 ---
 
