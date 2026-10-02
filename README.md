@@ -1,67 +1,56 @@
 # 🏔 Val d'Aran en calma — 5–9 octubre 2026
 
-Guía personal del viaje de dos personas al **Val d'Aran**: plan día a día con fotos,
-rutas cortas y llanas, enlaces directos de coche y senderismo, aparcamientos,
-cenas, plan B y una web para que **tú y Mariina subáis las fotos del día a la
-misma carpeta de Drive**.
+Guía personal del viaje al **Val d'Aran** para dos personas: plan día a día, rutas cortas, enlaces directos de coche y senderismo, aparcamientos, cenas, plan B y una web móvil.
 
-Incluye además la **presentación** (`presentacion/Val_dAran_5-9_octubre.pptx`),
-13 diapositivas con los mismos enlaces y códigos QR.
-
----
-
-## 📁 Estructura del repo
+## Estructura
 
 ```
-val-daran-viaje/
-├── index.html              # la web (guía día a día)
-├── css/styles.css          # estilos
-├── js/app.js               # ← CONFIGURACIÓN (fotos, calendario)
+aran/
+├── index.html
+├── css/styles.css
+├── js/app.js
 ├── assets/
-│   ├── photos/             # fotos de cada día (14)
-│   └── maps/               # mapas SVG: general + día 1–4
+│   ├── photos/             # fotos del viaje
+│   └── maps/               # mapas SVG general + días 1–4
 ├── presentacion/
 │   └── Val_dAran_5-9_octubre.pptx
-├── apps-script/
-│   └── Code.gs             # subida directa a Drive (opción avanzada)
+├── apps-script/Code.gs
 └── README.md
 ```
 
-## 🚀 1. Crear el repositorio en GitHub y subir el proyecto
+## Web
 
-El proyecto está preparado para publicarse como sitio estático.
+La web es HTML/CSS/JS estático y está preparada para GitHub Pages.
 
-## 🌐 2. Publicar la web (GitHub Pages)
+En GitHub: **Settings → Pages → Deploy from a branch → main → /(root)**.
 
-En el repo: **Settings → Pages → Source: Deploy from a branch**.
-Rama `main`, carpeta `/ (root)` → **Save**.
+## Fotos compartidas
 
-## 📷 3. Fotos del día en Drive compartido
+Hay dos opciones previstas en `js/app.js`:
 
-La web admite un formulario de Google o una app web de Apps Script para que las fotos de los dos acaben en la misma carpeta de Drive.
+- `photosFormUrl`: formulario de Google con subida de archivos.
+- `photoUploadApi`: endpoint opcional de Google Apps Script.
 
-Configura `photosFormUrl`, `photoUploadApi` y `driveFolderUrl` en `js/app.js`.
+`apps-script/Code.gs` contiene la opción avanzada para guardar automáticamente las fotos en subcarpetas `dia-1` … `dia-4`.
 
-## 📅 4. Añadir al calendario
+No pongas URLs privadas ni IDs sensibles de Drive en un repositorio público.
 
-Los botones de cada día generan eventos para Google Calendar.
+## Calendario
 
-## 🖼 5. Presentación (PPTX)
+Los botones de cada día generan enlaces de Google Calendar con las fechas del 5 al 8 de octubre de 2026.
 
-`presentacion/Val_dAran_5-9_octubre.pptx` — presentación de la guía del viaje.
+## Viaje
 
-## 🛠 6. Cómo editar la web
+- Base: Salardú.
+- Día 1 · lunes 5: llegada, Camin dera Bruisha y Tredòs.
+- Día 2 · martes 6: Era Artiga de Lin, Uelhs deth Joèu y Arties.
+- Día 3 · miércoles 7: Saut deth Pish y Vielha.
+- Día 4 · jueves 8: Bassa d'Oles, Bagergue y Garòs.
+- Viernes 9: check-out y continuación del viaje hasta el día 15.
 
-- **Textos y fotos**: `index.html`.
-- **Enlace de fotos / eventos**: `js/app.js`, objeto `CONFIG`.
-- **Colores**: variables en `css/styles.css`.
-- **Fotos nuevas**: súbelas a `assets/photos/`.
+## Estado
 
----
+El repositorio se está preparando para que **Arena pueda trabajar directamente sobre GitHub**, sin depender del ZIP adjunto al Issue #1.
 
-## 📚 Fuentes
+Los mapas y la estructura web ya están dentro del repositorio. Las fotografías y el PPTX original siguen siendo binarios del proyecto y no se han sustituido por versiones inventadas.
 
-visitvaldaran.com · rutaspirineos.org · wikiloc · turismo de la Vall d'Aran ·
-Parc Nacional d'Aigüestortes i Estany de Sant Maurici.
-
-*Hecha con calma, para dos 🤍*
