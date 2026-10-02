@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-24 -28 943 636" font-family="Segoe UI, Calibri, Arial, sans-serif">
+<rect x="-24" y="-28" width="943" height="636" rx="26" fill="#EAF1EC" stroke="#E3DFD4" stroke-width="2"/>
+<path d="M 95,362 L 875,362" fill="none" stroke="#C5C0B2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 675,362 L 490,250 L 390,205 L 290,165" fill="none" stroke="#C5C0B2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 255,362 L 230,515" fill="none" stroke="#C5C0B2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 8"/>
+<path d="M 445,362 L 468,530" fill="none" stroke="#C5C0B2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 8"/>
+<path d="M 618,366 L 602,534" fill="none" stroke="#C5C0B2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="10 8"/>
+<path d="M 290,165 L 195,260" fill="none" stroke="#C5C0B2" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="95" y="392" font-size="15" font-weight="700" fill="#6E6A5F">← N-230 · Les, Bossòst y Francia</text>
+<ellipse cx="290" cy="165" rx="66" ry="43" fill="none" stroke="#3E8E5A" stroke-width="8"/>
+<path d="M 290,165 L 255,362 L 230,515 L 255,362 L 390,205 L 290,165" fill="none" stroke="#E07A1F" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 297,174 L 397,214 L 497,259 L 672,370 L 445,354 L 468,530" fill="none" stroke="#2E6FD9" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M 283,157 L 383,196 L 483,241 L 666,352 L 610,366 L 594,534 L 195,262 L 486,254 L 283,157" fill="none" stroke="#8A48B0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="290" cy="165" r="17" fill="#E07A1F" stroke="#FFFFFF" stroke-width="3"/>
+<text x="290" y="172" font-size="18" text-anchor="middle" fill="#FFFFFF">★</text>
+<text x="290" y="208" font-size="20" font-weight="800" text-anchor="middle" fill="#33322E">SALARDÚ ★</text>
+<circle cx="675" cy="362" r="10" fill="#4A4A45" stroke="#FFFFFF" stroke-width="3"/><text x="675" y="398" font-size="17" font-weight="800" text-anchor="middle" fill="#33322E">VIELHA</text>
+<circle cx="255" cy="362" r="10" fill="#4A4A45" stroke="#FFFFFF" stroke-width="3"/><text x="255" y="340" font-size="15" font-weight="600" text-anchor="middle" fill="#33322E">Es Bòrdes</text>
+<circle cx="445" cy="362" r="10" fill="#4A4A45" stroke="#FFFFFF" stroke-width="3"/><text x="445" y="398" font-size="15" font-weight="600" text-anchor="middle" fill="#33322E">Pont d'Arròs</text>
+<circle cx="490" cy="250" r="10" fill="#4A4A45" stroke="#FFFFFF" stroke-width="3"/><text x="512" y="256" font-size="15" font-weight="600" fill="#33322E">Garòs</text>
+<circle cx="390" cy="205" r="10" fill="#4A4A45" stroke="#FFFFFF" stroke-width="3"/><text x="390" y="183" font-size="15" font-weight="600" text-anchor="middle" fill="#33322E">Arties</text>
+<circle cx="195" cy="260" r="10" fill="#4A4A45" stroke="#FFFFFF" stroke-width="3"/><text x="195" y="296" font-size="15" font-weight="600" text-anchor="middle" fill="#33322E">Bagergue</text>
+<circle cx="230" cy="515" r="11" fill="#2E6FD9" stroke="#FFFFFF" stroke-width="3"/><rect x="200" y="529" width="22" height="22" rx="5" fill="#274C3E"/><text x="211" y="545" font-size="15" font-weight="700" text-anchor="middle" fill="#FFFFFF">P</text><text x="253" y="521" font-size="17" font-weight="600" fill="#33322E">Era Artiga de Lin</text>
+<circle cx="468" cy="530" r="11" fill="#2E6FD9" stroke="#FFFFFF" stroke-width="3"/><rect x="438" y="544" width="22" height="22" rx="5" fill="#274C3E"/><text x="449" y="560" font-size="15" font-weight="700" text-anchor="middle" fill="#FFFFFF">P</text><text x="491" y="536" font-size="17" font-weight="600" fill="#33322E">Saut deth Pish</text>
+<circle cx="602" cy="534" r="11" fill="#2E6FD9" stroke="#FFFFFF" stroke-width="3"/><rect x="572" y="548" width="22" height="22" rx="5" fill="#274C3E"/><text x="583" y="564" font-size="15" font-weight="700" text-anchor="middle" fill="#FFFFFF">P</text><text x="625" y="540" font-size="17" font-weight="600" fill="#33322E">Bassa d'Oles</text>
+</svg>
