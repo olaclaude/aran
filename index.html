@@ -108,60 +108,29 @@
 
 
 
-<section id="faq" class="faq-section">
-  <div class="faq-head">
-    <span class="kicker">Por si acaso</span>
-    <h2>Preguntas rápidas</h2>
-    <p class="mini">La guía está pensada para ir directa al plan. Si alguna vez os preguntáis cómo funciona algo, está aquí abajo.</p>
-  </div>
-  <div class="faq-list">
-    <details>
-      <summary>¿Qué hago al abrir la web?</summary>
-      <p>La portada te lleva automáticamente a lo que toca ese día. Desde ahí sigues el recorrido de la jornada.</p>
-    </details>
-    <details>
-      <summary>¿Para qué sirve el botón del coche?</summary>
-      <p>Abre Google Maps con la ruta preparada hasta el punto de salida o parking de ese día.</p>
-    </details>
-    <details>
-      <summary>¿Y el botón de Wikiloc?</summary>
-      <p>Abre directamente el track elegido para la ruta de ese día.</p>
-    </details>
-    <details>
-      <summary>¿Qué conviene preparar antes de salir?</summary>
-      <p>Abrid las cuatro rutas en Wikiloc con Wi‑Fi y dejadlas disponibles offline. La web guarda el planning y los enlaces, pero no puede descargar por su cuenta los tracks de terceros.</p>
-    </details>
-  </div>
-</section>
-
 <section id="offline" class="offline-section">
   <div class="card offline-card">
     <span class="kicker">Antes de salir</span>
     <h2>Dejad las rutas listas offline</h2>
     <p class="lead">La web guarda el planning y los enlaces. Los mapas son de Google y piden conexión. Para tener el track real sin cobertura, abrid cada ruta en Wikiloc y guardadla como «Disponible offline» con Wi‑Fi antes de salir.</p>
-    <ul class="offline-list">
-      <li>
-        <span class="pip d1">1</span>
-        <div><strong>Camin dera Bruisha</strong><span>Día 1 · lunes 5</span></div>
-        <a href="https://es.wikiloc.com/rutas-a-pie/cami-de-les-bruixes-tredos-257821166" target="_blank" rel="noopener">Guardar</a>
+    <ul class="offline-list checklist" id="offlineChecklist">
+      <li class="checkitem">
+        <label><input type="checkbox" data-check="wikiloc"><span>Rutas guardadas offline en Wikiloc</span></label>
+        <div class="checkitem-links">
+          <a href="https://es.wikiloc.com/rutas-a-pie/cami-de-les-bruixes-tredos-257821166" target="_blank" rel="noopener">Día 1</a>
+          <a href="https://es.wikiloc.com/rutas-senderismo/artiga-de-lin-y-ojos-del-judio-valle-de-aran-56318346" target="_blank" rel="noopener">Día 2</a>
+          <a href="https://es.wikiloc.com/rutas-a-pie/eth-saut-deth-pish-54557739" target="_blank" rel="noopener">Día 3</a>
+          <a href="https://es.wikiloc.com/rutas-senderismo/lago-bassa-109524333" target="_blank" rel="noopener">Día 4</a>
+        </div>
       </li>
-      <li>
-        <span class="pip d2">2</span>
-        <div><strong>Era Artiga de Lin</strong><span>Día 2 · martes 6</span></div>
-        <a href="https://es.wikiloc.com/rutas-senderismo/artiga-de-lin-y-ojos-del-judio-valle-de-aran-56318346" target="_blank" rel="noopener">Guardar</a>
-      </li>
-      <li>
-        <span class="pip d3">3</span>
-        <div><strong>Saut deth Pish</strong><span>Día 3 · miércoles 7</span></div>
-        <a href="https://es.wikiloc.com/rutas-a-pie/eth-saut-deth-pish-54557739" target="_blank" rel="noopener">Guardar</a>
-      </li>
-      <li>
-        <span class="pip d4">4</span>
-        <div><strong>Bassa d'Oles</strong><span>Día 4 · jueves 8</span></div>
-        <a href="https://es.wikiloc.com/rutas-senderismo/lago-bassa-109524333" target="_blank" rel="noopener">Guardar</a>
-      </li>
+      <li class="checkitem"><label><input type="checkbox" data-check="nautaran-map"><span>Mapa de Naut Aran descargado en Google Maps</span></label></li>
+      <li class="checkitem"><label><input type="checkbox" data-check="home-screen"><span>Guía instalada en pantalla de inicio</span></label></li>
+      <li class="checkitem"><label><input type="checkbox" data-check="sidreria"><span>Reserva en Sidreria Era Bruisha · miércoles 7</span></label></li>
+      <li class="checkitem"><label><input type="checkbox" data-check="dinner-times"><span>Horarios de cenas confirmados el día anterior</span></label></li>
     </ul>
     <p class="mini">La web del viaje no puede descargar automáticamente los tracks de otros usuarios; preparadlos desde Wikiloc antes de salir.</p>
+    <div class="offline-extra"><strong>Google Maps</strong><span>Buscar <b>Naut Aran</b> → Descargar mapa sin conexión.</span></div>
+    <div class="offline-emergency"><strong>112</strong><span>Emergencias · guardad este número antes de salir.</span></div>
   </div>
 </section>
 
@@ -173,14 +142,16 @@
     </div>
     <div class="stat-chips"><span class="stat">≈ 2 km</span><span class="stat">circular llano</span><span class="stat">a pie desde la base</span></div>
 
+  
+  </div>
+
+  
+
   <div class="weather-widget" data-weather-day="1">
     <div class="weather-main"><span class="weather-icon">⛅</span><div><span class="weather-label">Tiempo del día</span><strong class="weather-title">Cargando tiempo…</strong></div></div>
     <div class="weather-stats"><span><b class="weather-min">—</b> mínima</span><span><b class="weather-max">—</b> máxima</span><span><b class="weather-rain">—</b> lluvia</span></div>
     <a class="weather-link" href="https://www.aemet.es/es/eltiempo/prediccion/montana?p=cat1&w=5" target="_blank" rel="noopener">Previsión de montaña en AEMET ↗</a>
   </div>
-  </div>
-
-  
   <div class="day-content">
     <article class="day-block day-planning">
       <div class="block-head"><span class="block-number">01</span><div><span class="block-kicker">Planning</span><h3>Plan del día</h3></div></div>
@@ -189,16 +160,15 @@
     </article>
 
     <div class="day-side">
-      <article class="day-block visit-card"><div class="block-head"><span class="block-number">02</span><div><span class="block-kicker">Qué visitar</span><h3>Paradas del día</h3></div></div><div class="visit-list"><div><b>Camin dera Bruisha</b><span>Bosque · ≈2 km</span></div><div><b>Salto de Tredós</b><span>Agua · primeras fotos</span></div><div><b>Terrasseta dera Bruisha</b><span>Cena informal</span></div></div></article>
-      <article class="day-block note-card"><div class="block-head"><span class="block-number">03</span><div><span class="block-kicker">A tener en cuenta</span><h3>Práctico</h3></div></div><dl><dt>Salida / parking</dt><dd>En Salardú, junto al alojamiento</dd><dt>Conducción</dt><dd>0 min — día sin coche</dd><dt>Paseo</dt><dd>≈ 2 km · llano · ≈ 45 min</dd><dt>Plan B</dt><dd>Acortar el bucle y cenar cerca</dd></dl></article>
+      <article class="day-block note-card"><div class="block-head"><span class="block-number">02</span><div><span class="block-kicker">A tener en cuenta</span><h3>Práctico</h3></div></div><dl><dt>Salida / parking</dt><dd>En Salardú, junto al alojamiento</dd><dt>Conducción</dt><dd>0 min — día sin coche</dd><dt>Paseo</dt><dd>≈ 2 km · llano · ≈ 45 min</dd><dt>Plan B</dt><dd>Acortar el bucle y cenar cerca</dd></dl></article>
     </div>
   </div>
 
   <article class="route-card">
-    <div class="route-card-head"><span class="block-number">04</span><div><span class="block-kicker">Cómo llegar</span><h3>A pie desde el alojamiento</h3><p>Este día no necesitáis coche.</p></div></div>
+    <div class="route-card-head"><span class="block-number">03</span><div><span class="block-kicker">Cómo llegar</span><h3>A pie desde el alojamiento</h3><p>Este día no necesitáis coche.</p></div></div>
     <figure class="map-card"><div class="map-frame"><iframe title="Google Maps: A pie desde el alojamiento" src="https://maps.google.com/maps?q=Camin%20dera%20Bruisha%2C%20Salard%C3%BA&amp;hl=es&amp;z=15&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><button type="button" class="map-lock"><span>Tocar para mover el mapa</span></button></div><figcaption>Google Maps · paseo a pie desde Salardú.<a class="map-open" href="https://www.google.com/maps/search/?api=1&query=Camin%20dera%20Bruisha%2C%20Salardu" target="_blank" rel="noopener">Abrir ruta en Google Maps ↗</a></figcaption></figure>
     <div class="route-launch">
-      <div class="route-launch-title"><span class="block-number">05</span><div><span class="block-kicker">La ruta</span><strong>Camin dera Bruisha</strong><p>Abre el track elegido para caminar.</p></div></div>
+      <div class="route-launch-title"><span class="block-number">04</span><div><span class="block-kicker">La ruta</span><strong>Camin dera Bruisha</strong><p>Abre el track elegido para caminar.</p></div></div>
       <a class="calendar-link" data-cal="1" href="#" aria-label="Añadir Día 1 al calendario"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>Añadir al calendario</a>
       <div class="route-buttons"><a class="primary is-walk" href="https://es.wikiloc.com/rutas-a-pie/cami-de-les-bruixes-tredos-257821166" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-boot"/></svg>Abrir ruta en Wikiloc</a></div>
     </div>
@@ -213,14 +183,16 @@
     </div>
     <div class="stat-chips"><span class="stat">2,5–3 km</span><span class="stat">praderas verdes</span><span class="stat">casi sin esfuerzo</span></div>
 
+  
+  </div>
+
+  
+
   <div class="weather-widget" data-weather-day="2">
     <div class="weather-main"><span class="weather-icon">⛅</span><div><span class="weather-label">Tiempo del día</span><strong class="weather-title">Cargando tiempo…</strong></div></div>
     <div class="weather-stats"><span><b class="weather-min">—</b> mínima</span><span><b class="weather-max">—</b> máxima</span><span><b class="weather-rain">—</b> lluvia</span></div>
     <a class="weather-link" href="https://www.aemet.es/es/eltiempo/prediccion/montana?p=cat1&w=5" target="_blank" rel="noopener">Previsión de montaña en AEMET ↗</a>
   </div>
-  </div>
-
-  
   <div class="day-content">
     <article class="day-block day-planning">
       <div class="block-head"><span class="block-number">01</span><div><span class="block-kicker">Planning</span><h3>Plan del día</h3></div></div>
@@ -229,16 +201,15 @@
     </article>
 
     <div class="day-side">
-      <article class="day-block visit-card"><div class="block-head"><span class="block-number">02</span><div><span class="block-kicker">Qué visitar</span><h3>Paradas del día</h3></div></div><div class="visit-list"><div><b>Era Artiga de Lin</b><span>Praderas · 2,5–3 km</span></div><div><b>Uelhs deth Joèu</b><span>Nacimiento de agua</span></div><div><b>Arties</b><span>Paseo y cena</span></div></div></article>
-      <article class="day-block note-card"><div class="block-head"><span class="block-number">03</span><div><span class="block-kicker">A tener en cuenta</span><h3>Práctico</h3></div></div><dl><dt>Salida / parking</dt><dd>Parking de Uelhs deth Joèu, por Es Bòrdes</dd><dt>Conducción</dt><dd>≈ 30 min desde Salardú</dd><dt>Paseo</dt><dd>circular · 2,5–3 km · sencilla</dd><dt>Plan B</dt><dd>Arties con cubiertos o Vielha</dd></dl></article>
+      <article class="day-block note-card"><div class="block-head"><span class="block-number">02</span><div><span class="block-kicker">A tener en cuenta</span><h3>Práctico</h3></div></div><dl><dt>Salida / parking</dt><dd>Parking de Uelhs deth Joèu, por Es Bòrdes</dd><dt>Conducción</dt><dd>≈ 30 min desde Salardú</dd><dt>Paseo</dt><dd>circular · 2,5–3 km · sencilla</dd><dt>Plan B</dt><dd>Arties con cubiertos o Vielha</dd></dl></article>
     </div>
   </div>
 
   <article class="route-card">
-    <div class="route-card-head"><span class="block-number">04</span><div><span class="block-kicker">Cómo llegar</span><h3>Salardú → Uelhs deth Joèu</h3><p>Ruta en coche con parada en Es Bòrdes.</p></div></div>
+    <div class="route-card-head"><span class="block-number">03</span><div><span class="block-kicker">Cómo llegar</span><h3>Salardú → Uelhs deth Joèu</h3><p>Ruta en coche con parada en Es Bòrdes.</p></div></div>
     <figure class="map-card"><div class="map-frame"><iframe title="Google Maps: Salardú → Uelhs deth Joèu" src="https://maps.google.com/maps?saddr=Salard%C3%BA&amp;daddr=Uelhs%20deth%20Jo%C3%A8u&amp;dirflg=d&amp;hl=es&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><button type="button" class="map-lock"><span>Tocar para mover el mapa</span></button></div><figcaption>Google Maps · Salardú → Es Bòrdes → Uelhs deth Joèu.<a class="map-open" href="https://www.google.com/maps/dir/?api=1&origin=Salard%C3%BA&destination=Uelhs%20deth%20Jo%C3%A8u&waypoints=Es%20B%C3%B2rdes&travelmode=driving" target="_blank" rel="noopener">Abrir ruta en Google Maps ↗</a></figcaption></figure>
     <div class="route-launch">
-      <div class="route-launch-title"><span class="block-number">05</span><div><span class="block-kicker">La ruta</span><strong>Primero coche, después sendero</strong><p>La navegación te lleva al inicio; Wikiloc te guía caminando.</p></div></div>
+      <div class="route-launch-title"><span class="block-number">04</span><div><span class="block-kicker">La ruta</span><strong>Primero coche, después sendero</strong><p>La navegación te lleva al inicio; Wikiloc te guía caminando.</p></div></div>
       <a class="calendar-link" data-cal="2" href="#" aria-label="Añadir Día 2 al calendario"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>Añadir al calendario</a>
       <div class="route-buttons"><a class="primary is-drive" href="https://www.google.com/maps/dir/?api=1&origin=Salard%C3%BA&destination=Uelhs%20deth%20Jo%C3%A8u&waypoints=Es%20B%C3%B2rdes&travelmode=driving" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-car"/></svg>Ir en coche · Google Maps</a><a class="primary is-walk" href="https://es.wikiloc.com/rutas-senderismo/artiga-de-lin-y-ojos-del-judio-valle-de-aran-56318346" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-boot"/></svg>Abrir ruta · Wikiloc</a></div>
     </div>
@@ -253,32 +224,32 @@
     </div>
     <div class="stat-chips"><span class="stat">≈ 1,5 km ida y vuelta</span><span class="stat">≈35 m</span><span class="stat">dificultad baja</span></div>
 
+  
+  </div>
+
+  
+
   <div class="weather-widget" data-weather-day="3">
     <div class="weather-main"><span class="weather-icon">⛅</span><div><span class="weather-label">Tiempo del día</span><strong class="weather-title">Cargando tiempo…</strong></div></div>
     <div class="weather-stats"><span><b class="weather-min">—</b> mínima</span><span><b class="weather-max">—</b> máxima</span><span><b class="weather-rain">—</b> lluvia</span></div>
     <a class="weather-link" href="https://www.aemet.es/es/eltiempo/prediccion/montana?p=cat1&w=5" target="_blank" rel="noopener">Previsión de montaña en AEMET ↗</a>
   </div>
-  </div>
-
-  
   <div class="day-content">
     <article class="day-block day-planning">
       <div class="block-head"><span class="block-number">01</span><div><span class="block-kicker">Planning</span><h3>Plan del día</h3></div></div>
       <ul class="timeline"><li><span class="when">Mañana · coche</span><div class="what">Coche hasta <b>Plan des Artiguetes</b>: 12 km de pista asfaltada desde Pont d'Arròs, estrecha y con curvas.</div></li><li><span class="when">Saut deth Pish</span><div class="what">La cascada emblemática del valle: un salto principal y otro inferior, en un recorrido de ≈ 1,5 km ida y vuelta.</div></li><li><span class="when">Mediodía</span><div class="what">Regreso al alojamiento para descansar y ducharse sin agotar las piernas.</div></li><li><span class="when">Tarde · Vielha</span><div class="what">Comercios y calles peatonales. <b>Cena en Sidreria Era Bruisha</b>: reserva recomendable; confirmar horario y precio.</div></li></ul>
-      <div class="factday"><b>Dato del día:</b> el planning original estima unos 35 m; el track de Wikiloc enlazado registra 33 m de desnivel.</div>
     </article>
 
     <div class="day-side">
-      <article class="day-block visit-card"><div class="block-head"><span class="block-number">02</span><div><span class="block-kicker">Qué visitar</span><h3>Paradas del día</h3></div></div><div class="visit-list"><div><b>Saut deth Pish</b><span>Cascada · ≈1,5 km</span></div><div><b>Vielha</b><span>Paseo urbano</span></div><div><b>Río Garona</b><span>Tarde tranquila</span></div></div></article>
-      <article class="day-block note-card"><div class="block-head"><span class="block-number">03</span><div><span class="block-kicker">A tener en cuenta</span><h3>Práctico</h3></div></div><dl><dt>Salida / parking</dt><dd>Plan des Artiguetes, 12 km de pista desde Pont d'Arròs</dd><dt>Conducción</dt><dd>≈ 40 min desde Salardú</dd><dt>Paseo</dt><dd>ida y vuelta · ≈ 1,5 km · 30–45 min</dd><dt>Plan B</dt><dd>Directos a Vielha si la pista no convence</dd></dl></article>
+      <article class="day-block note-card"><div class="block-head"><span class="block-number">02</span><div><span class="block-kicker">A tener en cuenta</span><h3>Práctico</h3></div></div><dl><dt>Salida / parking</dt><dd>Plan des Artiguetes, 12 km de pista desde Pont d'Arròs</dd><dt>Conducción</dt><dd>≈ 40 min desde Salardú</dd><dt>Paseo</dt><dd>ida y vuelta · ≈ 1,5 km · 30–45 min</dd><dt>Plan B</dt><dd>Directos a Vielha si la pista no convence</dd></dl></article>
     </div>
   </div>
 
   <article class="route-card">
-    <div class="route-card-head"><span class="block-number">04</span><div><span class="block-kicker">Cómo llegar</span><h3>Salardú → Plan des Artiguetes</h3><p>Ruta en coche hasta el punto de salida.</p></div></div>
+    <div class="route-card-head"><span class="block-number">03</span><div><span class="block-kicker">Cómo llegar</span><h3>Salardú → Plan des Artiguetes</h3><p>Ruta en coche hasta el punto de salida.</p></div></div>
     <figure class="map-card"><div class="map-frame"><iframe title="Google Maps: Salardú → Plan des Artiguetes" src="https://maps.google.com/maps?saddr=Salard%C3%BA&amp;daddr=Plan%20des%20Artiguetes&amp;dirflg=d&amp;hl=es&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><button type="button" class="map-lock"><span>Tocar para mover el mapa</span></button></div><figcaption>Google Maps · ruta en coche hasta Plan des Artiguetes.<a class="map-open" href="https://www.google.com/maps/dir/?api=1&origin=Salard%C3%BA&destination=Plan%20des%20Artiguetes&travelmode=driving" target="_blank" rel="noopener">Abrir ruta en Google Maps ↗</a></figcaption></figure>
     <div class="route-launch">
-      <div class="route-launch-title"><span class="block-number">05</span><div><span class="block-kicker">La ruta</span><strong>Primero coche, después sendero</strong><p>La navegación te lleva al inicio; Wikiloc te guía caminando.</p></div></div>
+      <div class="route-launch-title"><span class="block-number">04</span><div><span class="block-kicker">La ruta</span><strong>Primero coche, después sendero</strong><p>La navegación te lleva al inicio; Wikiloc te guía caminando.</p></div></div>
       <a class="calendar-link" data-cal="3" href="#" aria-label="Añadir Día 3 al calendario"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>Añadir al calendario</a>
       <div class="route-buttons"><a class="primary is-drive" href="https://www.google.com/maps/dir/?api=1&origin=Salard%C3%BA&destination=Plan%20des%20Artiguetes&travelmode=driving" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-car"/></svg>Ir en coche · Google Maps</a><a class="primary is-walk" href="https://es.wikiloc.com/rutas-a-pie/eth-saut-deth-pish-54557739" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-boot"/></svg>Abrir ruta · Wikiloc</a></div>
     </div>
@@ -293,14 +264,16 @@
     </div>
     <div class="stat-chips"><span class="stat">1,2 km</span><span class="stat">circular llano</span><span class="stat">plan completo o relajado</span></div>
 
+  
+  </div>
+
+  
+
   <div class="weather-widget" data-weather-day="4">
     <div class="weather-main"><span class="weather-icon">⛅</span><div><span class="weather-label">Tiempo del día</span><strong class="weather-title">Cargando tiempo…</strong></div></div>
     <div class="weather-stats"><span><b class="weather-min">—</b> mínima</span><span><b class="weather-max">—</b> máxima</span><span><b class="weather-rain">—</b> lluvia</span></div>
     <a class="weather-link" href="https://www.aemet.es/es/eltiempo/prediccion/montana?p=cat1&w=5" target="_blank" rel="noopener">Previsión de montaña en AEMET ↗</a>
   </div>
-  </div>
-
-  
   <div class="day-content">
     <article class="day-block day-planning">
       <div class="block-head"><span class="block-number">01</span><div><span class="block-kicker">Planning</span><h3>Plan del día</h3></div></div>
@@ -309,16 +282,15 @@
     </article>
 
     <div class="day-side">
-      <article class="day-block visit-card"><div class="block-head"><span class="block-number">02</span><div><span class="block-kicker">Qué visitar</span><h3>Paradas del día</h3></div></div><div class="visit-list"><div><b>Bassa d'Oles</b><span>Lago · 1,2 km</span></div><div><b>Bagergue</b><span>Pueblo</span></div><div><b>Garòs</b><span>Parada final</span></div></div></article>
-      <article class="day-block note-card"><div class="block-head"><span class="block-number">03</span><div><span class="block-kicker">A tener en cuenta</span><h3>Práctico</h3></div></div><dl><dt>Salida / parking</dt><dd>Parking junto a la Bassa, desde Gausac</dd><dt>Conducción</dt><dd>≈ 25 min desde Salardú</dd><dt>Paseo</dt><dd>circular · 1,2 km · llano · ≈ 30 min</dd><dt>Plan B</dt><dd>Bassa + solo Bagergue</dd></dl></article>
+      <article class="day-block note-card"><div class="block-head"><span class="block-number">02</span><div><span class="block-kicker">A tener en cuenta</span><h3>Práctico</h3></div></div><dl><dt>Salida / parking</dt><dd>Parking junto a la Bassa, desde Gausac</dd><dt>Conducción</dt><dd>≈ 25 min desde Salardú</dd><dt>Paseo</dt><dd>circular · 1,2 km · llano · ≈ 30 min</dd><dt>Plan B</dt><dd>Bassa + solo Bagergue</dd></dl></article>
     </div>
   </div>
 
   <article class="route-card">
-    <div class="route-card-head"><span class="block-number">04</span><div><span class="block-kicker">Cómo llegar</span><h3>Salardú → Bassa d'Oles</h3><p>Ruta en coche hasta el parking.</p></div></div>
+    <div class="route-card-head"><span class="block-number">03</span><div><span class="block-kicker">Cómo llegar</span><h3>Salardú → Bassa d'Oles</h3><p>Ruta en coche hasta el parking.</p></div></div>
     <figure class="map-card"><div class="map-frame"><iframe title="Google Maps: Salardú → Bassa d'Oles" src="https://maps.google.com/maps?saddr=Salard%C3%BA&amp;daddr=Bassa%20d%27Oles&amp;dirflg=d&amp;hl=es&amp;output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe><button type="button" class="map-lock"><span>Tocar para mover el mapa</span></button></div><figcaption>Google Maps · ruta en coche hasta Bassa d'Oles.<a class="map-open" href="https://www.google.com/maps/dir/?api=1&origin=Salard%C3%BA&destination=Bassa%20d%27Oles&travelmode=driving" target="_blank" rel="noopener">Abrir ruta en Google Maps ↗</a></figcaption></figure>
     <div class="route-launch">
-      <div class="route-launch-title"><span class="block-number">05</span><div><span class="block-kicker">La ruta</span><strong>Primero coche, después sendero</strong><p>La navegación te lleva al inicio; Wikiloc te guía caminando.</p></div></div>
+      <div class="route-launch-title"><span class="block-number">04</span><div><span class="block-kicker">La ruta</span><strong>Primero coche, después sendero</strong><p>La navegación te lleva al inicio; Wikiloc te guía caminando.</p></div></div>
       <a class="calendar-link" data-cal="4" href="#" aria-label="Añadir Día 4 al calendario"><svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg>Añadir al calendario</a>
       <div class="route-buttons"><a class="primary is-drive" href="https://www.google.com/maps/dir/?api=1&origin=Salard%C3%BA&destination=Bassa%20d%27Oles&travelmode=driving" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-car"/></svg>Ir en coche · Google Maps</a><a class="primary is-walk" href="https://es.wikiloc.com/rutas-senderismo/lago-bassa-109524333" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="#i-boot"/></svg>Abrir ruta · Wikiloc</a></div>
     </div>
@@ -492,6 +464,17 @@
     <span>Salardú, Arties y Vielha siguen estando ahí con una terraza seca.</span></div>
 </section>
 
+<section id="safety" class="safety-section">
+  <div class="card safety-card">
+    <span class="kicker">Si algo se complica</span>
+    <h2>Sin cobertura o con un susto</h2>
+    <div class="safety-grid">
+      <div><strong>112</strong><span>Emergencias. Decid dónde estáis y cuántos sois.</span></div>
+      <div><strong>Antes de salir</strong><span>Avisad a alguien del plan del día y de la ruta que vais a hacer.</span></div>
+    </div>
+  </div>
+</section>
+
 <section id="datos">
   <span class="kicker">Para la sobremesa</span>
   <h2>Datos interesantes del valle</h2>
@@ -516,6 +499,16 @@
     <span class="kicker">Viernes 9</span>
     <h2>Check-out… ¿y después?</h2>
     <p class="lead">Tres caminos posibles desde el día 9 hasta el 15 — decididlo allí, sin prisas.</p>
+    <div class="checkout-links">
+      <span class="kicker">Antes de decidir</span>
+      <p>Comprobad nieve, puertos y estado de las carreteras.</p>
+      <div>
+        <a href="https://www.meteo.cat/prediccio/" target="_blank" rel="noopener">Meteocat</a>
+        <a href="https://www.aemet.es/es/eltiempo/prediccion/montana?p=cat1&amp;w=5" target="_blank" rel="noopener">AEMET montaña</a>
+        <a href="https://transit.gencat.cat/es/informacio-viaria/estat-transit/" target="_blank" rel="noopener">Trànsit Catalunya</a>
+        <a href="https://www.dgt.es/conoce-el-estado-del-trafico/informacion-e-incidencias-de-trafico/" target="_blank" rel="noopener">DGT</a>
+      </div>
+    </div>
     <div class="opts">
       <div class="opt"><span class="n">1</span><h3>Hacia casa por Francia</h3>
         <p>Vielha → Port del Portilhòn → Luchon → Montrejeau (A64). Comprobad el estado del puerto en octubre.</p>
@@ -536,9 +529,9 @@
 <footer>
   <img src="assets/icon.svg" alt="" width="40" height="40">
   <p>Guía móvil del viaje · abre la web y sigue el bloque «Hoy»</p>
-  <p>La guía parte de nuestra presentación del viaje. Comprobad horarios y accesos el día anterior.</p>
-  <p>La portada es una ilustración de ambiente, no una foto del viaje.</p>
 </footer>
+
+<div id="mobileActionBar" class="mobile-action-bar" aria-label="Acciones del día" hidden></div>
 
 <nav class="tabbar" aria-label="Atajos del viaje">
   <a href="#hoy"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><span>Hoy</span></a>
@@ -558,11 +551,10 @@
   </div>
 </div>
 <div class="sheet" id="sheet-more" hidden>
-  <div class="sheet-card" role="dialog" aria-label="Más secciones">
-    <a href="#faq"><b>Preguntas rápidas</b><span>Coche, Wikiloc y uso de la guía</span></a>
-    <a href="#aparcamientos"><b>Aparcamientos</b><span>Dónde dejar el Fiat 500</span></a>
+  <div class="sheet-card" role="dialog" aria-label="Más secciones">    <a href="#aparcamientos"><b>Aparcamientos</b><span>Dónde dejar el Fiat 500</span></a>
     <a href="#cenas"><b>Cenas</b><span>Salardú, Arties y Vielha</span></a>
     <a href="#planb"><b>Plan B</b><span>Lluvia o piernas cansadas</span></a>
+    <a href="#safety"><b>Sin cobertura</b><span>112 y plan del día</span></a>
     <a href="#datos"><b>Datos del valle</b><span>Para la sobremesa</span></a>
     <a href="#checkout"><b>Check-out</b><span>Viernes 9 y continuación</span></a>
   </div>
