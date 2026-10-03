@@ -23,10 +23,11 @@
       <span class="chip">En el Fiat 500</span>
     </div>
     <div class="hero-actions">
-      <a class="btn" href="#dia1">Ver el plan de hoy ↓</a>
+      <a class="btn" id="todayButton" href="#dia1">Ver el itinerario ↓</a>
       <a class="btn outline" href="#mapa">Mapa del valle</a>
       <a class="btn green" href="#" data-upload>Subir fotos del día ↗</a>
     </div>
+    <p class="hero-note" id="todayNote">Viaje: 5–9 de octubre · base en Salardú</p>
   </div>
 </header>
 
@@ -60,8 +61,8 @@
       <p>Abre el día que toca: verás el plan (mañana → ducha → tarde), la ficha práctica y los enlaces directos.</p></div>
     <div class="card"><span class="num">2</span><h3>En el coche</h3>
       <p>Botón «Cómo llegar»: abre Google Maps con el itinerario completo desde Salardú. El mapa del día muestra el recorrido en color.</p></div>
-    <div class="card"><span class="num">3</span><h3>Al vuelta</h3>
-      <p>«Subir fotos del día» → el formulario guarda las imágenes en una carpeta de Drive visible para los dos.</p></div>
+    <div class="card"><span class="num">3</span><h3>A la vuelta</h3>
+      <p>«Subir fotos del día» → cuando conectemos el formulario, las imágenes quedarán juntas en la carpeta de Drive compartida.</p></div>
   </div>
 </section>
 
@@ -120,7 +121,7 @@
     <span class="day-date">Martes, 6 de octubre</span>
   </div>
   <div class="stat-chips">
-    <span class="stat">≈ 3 km</span><span class="stat">90 m de desnivel</span><span class="stat">1 h 10 min</span><span class="stat">buen calzado</span>
+    <span class="stat">2,5–3 km</span><span class="stat">praderas verdes</span><span class="stat">casi sin esfuerzo</span>
   </div>
   <div class="photos">
     <figure><img src="assets/photos/day2-1.jpg" alt="Era Artiga de Lin" loading="lazy"><figcaption>Era Artiga de Lin</figcaption></figure>
@@ -132,7 +133,7 @@
       <h3>El plan del día</h3>
       <ul class="timeline">
         <li><span class="when">Mañana · ruta</span><div class="what">Coche hasta <b>Es Bòrdes</b> y pista del río Joèu al parking de <b>Uelhs deth Joèu</b>.</div></li>
-        <li><span class="when">Ruta circular</span><div class="what"><b>Era Artiga de Lin</b>: unos 3 km, 90 m de desnivel y ≈1 h 10 — con escalones y zonas húmedas: buen agarre.</div></li>
+        <li><span class="when">Ruta circular</span><div class="what"><b>Era Artiga de Lin</b>: recorrido circular muy sencillo de 2,5–3 km entre praderas verdes; una ruta muy agradecida.</div></li>
         <li><span class="when">En el mismo espacio</span><div class="what"><b>Uelhs deth Joèu</b>, el nacimiento que brota entre las rocas negras.</div></li>
         <li><span class="when">Vuelta y ducha</span><div class="what">Al hotel a relajarse; por la tarde, <b>Arties</b> a pocos minutos: calles de piedra y cena sin prisa.</div></li>
       </ul>
@@ -143,7 +144,7 @@
       <dl>
         <dt>Salida / parking</dt><dd>Parking de Uelhs deth Joèu (pista desde Es Bòrdes)</dd>
         <dt>Conducción</dt><dd>≈ 30 min desde Salardú</dd>
-        <dt>Paseo</dt><dd>circular · 3 km · 90 m · 1 h 10</dd>
+        <dt>Paseo</dt><dd>circular · 2,5–3 km · sencilla</dd>
         <dt>Plan B (lluvia)</dt><dd>Arties con cubiertos o Vielha</dd>
       </dl>
       <p class="mini">El parking es amplio pero se llena: salid tras el desayuno.</p>
@@ -168,7 +169,7 @@
     <span class="day-date">Miércoles, 7 de octubre</span>
   </div>
   <div class="stat-chips">
-    <span class="stat">1,2 km ida y vuelta</span><span class="stat">≈ 45 min efectivos</span><span class="stat">dificultad baja</span><span class="stat">cascada emblemática</span>
+    <span class="stat">1,5 km ida y vuelta</span><span class="stat">salto de 35 m</span><span class="stat">dificultad baja</span><span class="stat">cascada emblemática</span>
   </div>
   <div class="photos">
     <figure><img src="assets/photos/day3-1.jpg" alt="Saut deth Pish" loading="lazy"><figcaption>Saut deth Pish</figcaption></figure>
@@ -379,14 +380,13 @@
       <div class="body">
         <ul>
           <li><b>Vielha bajo techo:</b> Museu Etnològic de la Vall d'Aran, tiendas y tapas por el casco.</li>
-          <li><b>Caldea (Escunhau):</b> centro termal a minutos de Vielha — consultad horario y entradas.</li>
-          <li><b>Compras útiles:</b> supermercado en Vielha para la cena y el camino del día siguiente.</li>
+                    <li><b>Compras útiles:</b> supermercado en Vielha para la cena y el camino del día siguiente.</li>
           <li><b>Evitar la pista del Pish</b> con lluvia: es estrecha y con curvas.</li>
         </ul>
       </div>
     </div>
     <div class="pcard tired">
-      <header>SI CANSAICIÓN</header>
+      <header>SI ESTÁIS CANSADOS</header>
       <div class="body">
         <ul>
           <li><b>Acortar Artiga:</b> desde el parking, los Uelhs deth Joèu están a unos 500 m llanos.</li>
@@ -449,8 +449,8 @@
 </div><!-- /wrap -->
 
 <footer>
-  <p>Hecha a medida para nosotros · <a href="presentacion/Val_dAran_5-9_octubre.pptx">descargar la presentación (PPTX)</a></p>
-  <p>Enlaces verificados en oct. 2026 · fuentes: visitvaldaran.com, rutaspirineos.org y turismo de la Vall d'Aran.</p>
+  <p>Hecha a medida para nosotros · guía móvil del viaje</p>
+  <p>La guía parte de nuestra presentación del viaje. Comprobad horarios y accesos el día anterior.</p>
 </footer>
 
 <script src="js/app.js"></script>
