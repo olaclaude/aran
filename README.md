@@ -217,3 +217,11 @@ La aplicación ya tiene:
 - despliegue automático desde GitHub `main` a Vercel.
 
 El objetivo de Arena debe ser **revisar, probar y mejorar esta implementación existente**, no reconstruir el proyecto desde cero ni recuperar funcionalidades que ya fueron eliminadas.
+
+## Navegación y scroll
+
+La navegación interna usa un único sistema de desplazamiento suave: `html { scroll-behavior: smooth; }` con `scroll-padding-top: 72px` para respetar la barra de navegación fija.
+
+Los botones de apertura de los días usan `scrollIntoView({block: "start"})` sin imponer un comportamiento de scroll independiente. Esto evita duplicar la lógica de desplazamiento y reduce saltos o reajustes en móvil.
+
+No añadir nuevos mecanismos de scroll suave mediante JavaScript salvo que exista una necesidad concreta y se compruebe su interacción con la navegación fija, el `IntersectionObserver` y las barras móviles.
