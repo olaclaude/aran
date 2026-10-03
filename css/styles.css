@@ -2048,3 +2048,10 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
   .route-buttons { grid-template-columns:1fr; }
   .day-card-head .stat-chips { margin-left:0; }
 }
+
+/* Final cleanup: compact secondary calendar/weather status */
+.calendar-link{display:inline-flex;align-items:center;gap:7px;margin:0 18px 12px;padding:7px 10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--pine);font-size:.78rem;font-weight:700;text-decoration:none}
+.calendar-link .ico{width:16px;height:16px}
+.calendar-link:hover{transform:translateY(-1px)}
+.weather-source{display:block;color:var(--muted);font-size:.72rem;line-height:1.2}
+@media (max-width:720px){.calendar-link{margin:0 14px 10px;font-size:.76rem}.weather-source{font-size:.7rem}}
