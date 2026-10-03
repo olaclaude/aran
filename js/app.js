@@ -32,22 +32,58 @@ function mapsRoute(origin, destination) {
     "&travelmode=driving";
 }
 
+function iconEl(id) {
+  const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  svg.setAttribute("class", "ico");
+  svg.setAttribute("aria-hidden", "true");
+  const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+  use.setAttribute("href", "#i-" + id);
+  svg.appendChild(use);
+  return svg;
+}
+
+function cleanLabel(label) {
+  return label.replace(/^\s*\p{Extended_Pictographic}\uFE0F?\s*/u, "");
+}
+
 function addStep(container, label, text, href, cls = "") {
   const row = document.createElement("div");
   row.className = "trip-step";
   const copy = document.createElement("div");
-  copy.innerHTML = "<span>" + label + "</span><strong>" + text + "</strong>";
+  const labelEl = document.createElement("span");
+  labelEl.textContent = cleanLabel(label);
+  const strong = document.createElement("strong");
+  strong.textContent = text;
+  copy.append(labelEl, strong);
   row.appendChild(copy);
   if (href) {
+    /* «Después del coche» es el paso a pie: el coche se marca con 🚗, no con la palabra. */
+    const drive = label.includes("🚗");
     const a = document.createElement("a");
     a.className = cls || "step-button";
     a.href = href;
     a.target = "_blank";
     a.rel = "noopener";
-    a.textContent = label.includes("coche") ? "🚗 Ir en coche" : "🥾 Abrir Wikiloc";
+    a.append(iconEl(drive ? "car" : "boot"), document.createTextNode(drive ? "Ir en coche" : "Abrir Wikiloc"));
     row.appendChild(a);
   }
   container.appendChild(row);
+}
+
+function markJourney(key) {
+  document.querySelectorAll("[data-journey]").forEach((a) => {
+    const on = key && a.dataset.journey === String(key);
+    a.classList.toggle("is-now", on);
+    if (on) a.setAttribute("aria-current", "date");
+    else a.removeAttribute("aria-current");
+  });
+}
+
+function setCount(text) {
+  const el = document.querySelector("#todayCount");
+  if (!el) return;
+  el.hidden = !text;
+  el.textContent = text || "";
 }
 
 function wireToday() {
@@ -72,6 +108,9 @@ function wireToday() {
     note.textContent = "Mañana: salida hacia el alojamiento en Salardú.";
     title.textContent = "Hoy · preparar la salida";
     summary.textContent = "Mañana salís desde Sant Feliu de Guíxols. Dejad Wikiloc preparado antes de salir.";
+    const untilLeave = Math.round((preTrip - date) / 86400000);
+    setCount(untilLeave === 1 ? "La salida es mañana" : "Faltan " + untilLeave + " días para salir");
+    markJourney("");
     steps.innerHTML = "";
     addStep(steps, "🚗 Mañana · coche", "Sant Feliu de Guíxols → alojamiento en Salardú", mapsRoute(CONFIG.home, CONFIG.hotel), "step-button primary");
     addStep(steps, "🥾 Antes de salir", "Guardar las 4 rutas y el mapa offline en Wikiloc", null);
@@ -84,6 +123,8 @@ function wireToday() {
     note.textContent = "Hoy: salida desde Sant Feliu de Guíxols → Salardú.";
     title.textContent = "HOY · salida al Val d'Aran";
     summary.textContent = "🚗 Salida primero. Al llegar: check-in, descanso y paseo corto.";
+    setCount("Hoy es el día de salir");
+    markJourney("");
     steps.innerHTML = "";
     addStep(steps, "🚗 Coche", "Sant Feliu de Guíxols → Carretera de Bagergue, 3, Salardú", mapsRoute(CONFIG.home, CONFIG.hotel), "step-button primary");
     addStep(steps, "🥾 Al llegar", "Check-in, descanso y Camin dera Bruisha", CONFIG.days[0].wikiloc, "step-button");
@@ -102,6 +143,8 @@ function wireToday() {
     note.textContent = "HOY · Día " + n + " · " + day.title;
     title.textContent = "HOY · Día " + n;
     summary.textContent = day.summary;
+    setCount("Día " + n + " de 4");
+    markJourney(n);
     steps.innerHTML = "";
 
     if (n === 1) {
@@ -129,6 +172,8 @@ function wireToday() {
   note.textContent = "Desde el 9 de octubre · check-out y continuación hasta el 15.";
   title.textContent = "Después del Día 4";
   summary.textContent = "Check-out y continuación del viaje hasta el 15 de octubre.";
+  setCount("");
+  markJourney(9);
   steps.innerHTML = "";
   addStep(steps, "Viernes 9", "Check-out · decidir la continuación según tiempo y ganas", null);
 }
@@ -237,6 +282,14 @@ function wireNav() {
         links.forEach((a) => a.classList.remove("active"));
         const a = map.get(e.target.id);
         if (a) a.classList.add("active");
+        const id = e.target.id;
+        document.querySelectorAll(".tabbar a, .tabbar button").forEach((t) => t.classList.remove("is-on"));
+        const tab = document.querySelector('.tabbar a[href="#' + id + '"]');
+        if (tab) tab.classList.add("is-on");
+        const daysBtn = document.querySelector('.tabbar [data-sheet="sheet-days"]');
+        const moreBtn = document.querySelector('.tabbar [data-sheet="sheet-more"]');
+        if (daysBtn) daysBtn.classList.toggle("is-on", /^dia[1-4]$/.test(id));
+        if (moreBtn) moreBtn.classList.toggle("is-on", ["como", "aparcamientos", "cenas", "planb", "datos", "checkout"].includes(id));
       }
     });
   }, { rootMargin: "-30% 0px -60% 0px" });
@@ -250,10 +303,52 @@ function wireServiceWorker() {
   });
 }
 
+function wireChrome() {
+  document.querySelectorAll(".map-frame iframe").forEach((frame) => {
+    frame.addEventListener("load", () => {
+      const box = frame.closest(".map-frame");
+      if (box) box.classList.add("is-loaded");
+    });
+  });
+  document.querySelectorAll(".map-lock").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const box = btn.closest(".map-frame");
+      if (box) box.classList.add("is-live");
+    });
+  });
+
+  const openers = [...document.querySelectorAll("[data-sheet]")];
+  const backdrop = document.querySelector(".sheet-backdrop");
+  function closeSheets() {
+    document.querySelectorAll(".sheet").forEach((s) => { s.hidden = true; });
+    openers.forEach((b) => b.setAttribute("aria-expanded", "false"));
+    document.body.classList.remove("sheet-open");
+  }
+  openers.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const sheet = document.getElementById(btn.getAttribute("data-sheet"));
+      if (!sheet) return;
+      const willOpen = sheet.hidden;
+      closeSheets();
+      if (willOpen) {
+        sheet.hidden = false;
+        btn.setAttribute("aria-expanded", "true");
+        document.body.classList.add("sheet-open");
+      }
+    });
+  });
+  if (backdrop) backdrop.addEventListener("click", closeSheets);
+  document.querySelectorAll(".sheet a").forEach((a) => a.addEventListener("click", closeSheets));
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closeSheets();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   wireCalendar();
   wireNav();
   wireToday();
   wireWeather();
+  wireChrome();
   wireServiceWorker();
 });

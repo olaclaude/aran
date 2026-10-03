@@ -1,6 +1,7 @@
 /* Val d'Aran en calma — service worker ligero para uso sin conexión.
- * Si cambias la lista SHELL, sube la versión CACHE para forzar la actualización. */
-const CACHE = "aran-v5";
+ * Si cambias la lista SHELL, sube la versión CACHE para forzar la actualización.
+ * Los mapas de Google no se cachean: son de otro origen y piden conexión. */
+const CACHE = "aran-v7";
 const SHELL = [
   "./",
   "./index.html",
@@ -8,11 +9,15 @@ const SHELL = [
   "./js/app.js",
   "./manifest.webmanifest",
   "./assets/icon.svg",
-  "./assets/maps/general.svg",
-  "./assets/maps/day1.svg",
-  "./assets/maps/day2.svg",
-  "./assets/maps/day3.svg",
-  "./assets/maps/day4.svg",
+  "./assets/icon-192.png",
+  "./assets/icon-512.png",
+  "./assets/apple-touch-icon.png",
+  "./assets/illustrations/valley.jpg",
+  "./assets/illustrations/dusk.jpg",
+  "./assets/fonts/fraunces.woff2",
+  "./assets/fonts/atkinson-regular.woff2",
+  "./assets/fonts/atkinson-bold.woff2",
+  "./assets/fonts/atkinson-italic.woff2",
 ];
 
 self.addEventListener("install", (ev) => {

@@ -29,12 +29,11 @@ aran/
 ├── manifest.webmanifest
 ├── assets/
 │   ├── icon.svg
-│   ├── maps/
-│   │   ├── general.svg
-│   │   ├── day1.svg
-│   │   ├── day2.svg
-│   │   ├── day3.svg
-│   │   └── day4.svg
+│   ├── illustrations/
+│   │   ├── valley.jpg
+│   │   └── dusk.jpg
+│   ├── fonts/
+│   ├── maps/          # esquemas SVG antiguos, ya no se muestran
 │   └── photos/
 │       └── README.md
 └── README.md
@@ -92,7 +91,7 @@ Una vez pasado el 8 de octubre, la portada pasa al estado de **check-out / conti
 
 ### Google Maps
 
-Se utilizan enlaces directos para la navegación en coche.
+La interfaz muestra **Google Maps incrustado** (lugar o valle) y enlaces directos para la navegación en coche. No dibujar mapas esquemáticos nuevos: si hace falta un mapa, es el de Google. El iframe pide conexión; el botón abre la ruta en la app.
 
 Rutas actualmente contempladas:
 
@@ -136,7 +135,7 @@ Si se añaden o eliminan recursos precargados en el service worker, actualizar l
 Hay que distinguir:
 
 - **Web propia:** puede quedar disponible mediante la caché PWA.
-- **Mapas SVG locales:** forman parte del repositorio y pueden quedar disponibles offline.
+- **Google Maps:** los mapas de la interfaz son de Google y **no funcionan offline**. Los SVG de `assets/maps/` son un esquema antiguo y no se muestran.
 - **Wikiloc:** la web solo contiene enlaces; los tracks/mapas de terceros requieren preparación previa en Wikiloc.
 - **Open-Meteo:** una nueva consulta de tiempo requiere conexión salvo que se implemente explícitamente una caché local de datos meteorológicos.
 
@@ -165,12 +164,13 @@ La presentación original menciona **35 m y 1,5 km de vuelta**, mientras que la 
 
 ## Diseño y UX: principios actuales
 
-- Mobile-first.
-- La pantalla **Hoy** es prioritaria.
+- Mobile-first, legible al sol, usable con una mano.
+- La pantalla **Hoy** es prioritaria y se solapa con la portada.
 - El tiempo informa, pero no domina la interfaz.
-- Las acciones de navegación (**Coche** y **Wikiloc**) son elementos principales.
+- Las acciones de navegación (**Coche** y **Wikiloc**) son elementos principales. El botón de coche es verde.
+- Los mapas visibles son **Google Maps**, no esquemas dibujados.
+- La portada usa una ilustración (`assets/illustrations/valley.jpg`). No volver a apuntar el fondo a `assets/photos/cover.jpg`: ese archivo no está en el repositorio.
 - Las fichas completas de cada día contienen el detalle.
-- La interfaz debe ser útil con una mano y fácil de leer durante el viaje.
 - No añadir complejidad innecesaria.
 - No introducir login, backend, base de datos, subida de fotos o Drive si no se solicita explícitamente.
 
@@ -198,7 +198,7 @@ La aplicación ya tiene:
 - enlaces directos de Wikiloc;
 - previsión meteorológica;
 - enlace de apoyo a AEMET;
-- mapas SVG locales;
+- mapas de Google incrustados, con enlace para abrir la ruta;
 - PWA/service worker;
 - instalación desde móvil;
 - enlaces de Google Calendar;
