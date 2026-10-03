@@ -2156,3 +2156,73 @@ body.is-offline .map-lock{display:none}
   .mobile-action-bar .mobile-route-buttons a.is-drive{background:#fff;color:var(--pine)}.mobile-action-bar .mobile-route-buttons a.is-walk{background:#b56d45;color:#fff}.mobile-action-bar .ico{width:18px;height:18px}
 }
 @media (hover:none) and (pointer:coarse) and (max-width:470px){.safety-grid{grid-template-columns:1fr}.mobile-action-bar{left:8px;right:8px}}
+
+
+/* === Mobile hardening: final precedence layer === */
+@media (max-width: 470px) {
+  /* Checklist: one full-width text column; route links get their own row. */
+  .offline-list .checkitem {
+    display: block !important;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+  .offline-list .checkitem > label {
+    display: flex !important;
+    width: 100%;
+    min-width: 0;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .offline-list .checkitem > label > input {
+    flex: 0 0 20px;
+    width: 20px;
+  }
+  .offline-list .checkitem > label > span {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+  }
+  .offline-list .checkitem-links {
+    display: flex !important;
+    width: auto;
+    margin: 8px 0 0 30px;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* Weather: always visible as the first utility block after day identity. */
+  .day > .weather-widget {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 0;
+  }
+  .day > .weather-widget .weather-main {
+    min-width: 0;
+  }
+  .day > .weather-widget .weather-title {
+    overflow-wrap: anywhere;
+  }
+  .day > .weather-widget .weather-stats {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    width: 100%;
+  }
+  .day > .weather-widget .weather-stats span {
+    min-width: 0 !important;
+  }
+  .day > .weather-widget .weather-link {
+    white-space: normal !important;
+    overflow-wrap: anywhere;
+  }
+
+  /* Fixed controls must leave their full footprint clear of the content. */
+  body {
+    padding-bottom: calc(136px + env(safe-area-inset-bottom)) !important;
+  }
+  .mobile-action-bar {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+  }
+}
