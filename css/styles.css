@@ -2112,3 +2112,10 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
   .faq-list summary{padding:12px 13px;font-size:.84rem}
   .faq-list details p{padding:0 13px 13px;font-size:.78rem}
 }
+
+
+/* Keep the mobile navigation visible on narrow Android browser viewports. */
+@media (max-width:900px){
+  .tabbar{display:grid !important;}
+  body{padding-bottom:calc(74px + env(safe-area-inset-bottom));}
+}
