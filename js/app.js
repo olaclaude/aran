@@ -86,6 +86,27 @@ function setCount(text) {
   el.textContent = text || "";
 }
 
+function getAppDate() {
+  const forced = new URLSearchParams(window.location.search).get("fecha");
+  if (/^\d{4}-\d{2}-\d{2}$/.test(forced)) {
+    const y = Number(forced.slice(0, 4));
+    const m = Number(forced.slice(5, 7));
+    const d = Number(forced.slice(8, 10));
+    const candidate = new Date(y, m - 1, d);
+    if (candidate.getFullYear() === y && candidate.getMonth() === m - 1 && candidate.getDate() === d) return candidate;
+  }
+  const parts = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Europe/Madrid", year: "numeric", month: "2-digit", day: "2-digit"
+  }).formatToParts(new Date());
+  const get = (type) => parts.find((p) => p.type === type)?.value;
+  return new Date(Number(get("year")), Number(get("month")) - 1, Number(get("day")));
+}
+
+function getAppDateISO() {
+  const d = getAppDate();
+  return [d.getFullYear(), String(d.getMonth() + 1).padStart(2, "0"), String(d.getDate()).padStart(2, "0")].join("-");
+}
+
 function wireToday() {
   const button = document.querySelector("#todayButton");
   const note = document.querySelector("#todayNote");
@@ -94,8 +115,7 @@ function wireToday() {
   const steps = document.querySelector("#todaySteps");
   if (!button || !title || !summary || !steps) return;
 
-  const madridToday = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Madrid", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
-  const date = new Date(madridToday + "T00:00:00");
+  const date = getAppDate();
   const preTrip = new Date("2026-10-04T00:00:00");
   const tripStart = new Date("2026-10-05T00:00:00");
   const tripEnd = new Date("2026-10-08T00:00:00");
@@ -206,6 +226,40 @@ function weatherLabel(code) {
   return "Tormenta";
 }
 
+const PLAN_B = {
+  1: "acortar el bucle y cenar cerca",
+  2: "Arties con cubiertos o Vielha",
+  3: "directos a Vielha, la pista del Pish es estrecha",
+  4: "Bassa d'Oles + solo Bagergue"
+};
+
+function renderRainPlan(data, widget, dayIndex) {
+  if (!widget || !data?.daily?.precipitation_probability_max) return;
+  const date = WEATHER.days[dayIndex - 1];
+  const i = data.daily.time.indexOf(date);
+  if (i < 0) return;
+  const probability = Math.round(Number(data.daily.precipitation_probability_max[i]) || 0);
+  let alert = widget.querySelector(".rain-plan");
+  if (probability >= 60) {
+    if (!alert) {
+      alert = document.createElement("div");
+      alert.className = "rain-plan";
+      widget.appendChild(alert);
+    }
+    alert.textContent = "";
+    const strong = document.createElement("strong");
+    strong.textContent = "Lluvia probable (" + probability + "%).";
+    const copy = document.createElement("span");
+    copy.textContent = " Plan B: " + PLAN_B[dayIndex] + ".";
+    const link = document.createElement("a");
+    link.href = "#planb";
+    link.textContent = " Ver Plan B";
+    alert.append(strong, copy, link);
+  } else if (alert) {
+    alert.remove();
+  }
+}
+
 function renderWeather(data, target, dayIndex) {
   const date = WEATHER.days[dayIndex - 1];
   const i = data.daily.time.indexOf(date);
@@ -217,6 +271,7 @@ function renderWeather(data, target, dayIndex) {
     w.querySelector(".weather-min").textContent = Math.round(data.daily.temperature_2m_min[i]) + "°";
     w.querySelector(".weather-max").textContent = Math.round(data.daily.temperature_2m_max[i]) + "°";
     w.querySelector(".weather-rain").textContent = Math.round(data.daily.precipitation_probability_max[i]) + "%";
+    renderRainPlan(data, w, dayIndex);
   });
 }
 
@@ -240,7 +295,7 @@ function updateWeatherSource(text) {
 }
 function renderTodayWeather(data) {
   const box=document.querySelector("#todayWeather"); if(!box) return;
-  const iso=new Intl.DateTimeFormat("en-CA",{timeZone:WEATHER.timezone}).format(new Date());
+  const iso=getAppDateISO();
   const idx=WEATHER.days.indexOf(iso)+1;
   if(idx>=1&&idx<=4){
     const source=document.querySelector('.weather-widget[data-weather-day="'+idx+'"]');
@@ -279,6 +334,54 @@ async function wireWeather() {
     }
 
   }
+}
+
+function wireMobileActionBar(dayNumber) {
+  const bar = document.querySelector("#mobileActionBar");
+  if (!bar) return;
+  bar.innerHTML = "";
+  if (!(dayNumber >= 1 && dayNumber <= 4)) {
+    bar.hidden = true;
+    return;
+  }
+  const section = document.querySelector("#dia" + dayNumber);
+  const source = section?.querySelector(".route-buttons");
+  if (!source) {
+    bar.hidden = true;
+    return;
+  }
+  const clone = source.cloneNode(true);
+  clone.classList.add("mobile-route-buttons");
+  clone.querySelectorAll("[data-cal]").forEach((el) => el.remove());
+  clone.querySelectorAll("a").forEach((a) => {
+    const isDrive = a.classList.contains("is-drive");
+    a.textContent = isDrive ? "Coche" : "Wikiloc";
+    a.prepend(iconEl(isDrive ? "car" : "boot"));
+    a.removeAttribute("target");
+    a.removeAttribute("rel");
+  });
+  bar.appendChild(clone);
+  bar.hidden = false;
+}
+
+const CHECKLIST_KEY = "aran:offline-checklist:v1";
+function wireOfflineChecklist() {
+  const root = document.querySelector("#offlineChecklist");
+  if (!root) return;
+  let saved = {};
+  try { saved = JSON.parse(localStorage.getItem(CHECKLIST_KEY) || "{}") || {}; } catch {}
+  root.querySelectorAll("input[data-check]").forEach((input) => {
+    const key = input.dataset.check;
+    input.checked = saved[key] === true;
+    input.addEventListener("change", () => {
+      saved[key] = input.checked;
+      try { localStorage.setItem(CHECKLIST_KEY, JSON.stringify(saved)); } catch {}
+    });
+  });
+}
+
+function updateOfflineState() {
+  document.body.classList.toggle("is-offline", !navigator.onLine);
 }
 
 function wireCalendar() {
@@ -373,6 +476,13 @@ document.addEventListener("DOMContentLoaded", () => {
   wireCalendar();
   wireNav();
   wireToday();
+  wireOfflineChecklist();
+  updateOfflineState();
+  window.addEventListener("online", updateOfflineState);
+  window.addEventListener("offline", updateOfflineState);
+  const appDate = getAppDate();
+  const appDay = appDate >= new Date(2026, 9, 5) && appDate <= new Date(2026, 9, 8) ? appDate.getDate() - 4 : 0;
+  wireMobileActionBar(appDay);
   wireWeather();
   wireChrome();
   wireServiceWorker();
