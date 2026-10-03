@@ -336,6 +336,43 @@ async function wireWeather() {
   }
 }
 
+function wireDayToggles() {
+  const days = [...document.querySelectorAll(".day[id^=\"dia\"]")];
+  if (!days.length) return;
+  const openDay = (dayNumber) => {
+    days.forEach(day => {
+      const isOpen = Number(day.id.replace("dia","")) === Number(dayNumber);
+      day.classList.toggle("day-open", isOpen);
+      const btn = day.querySelector(".day-toggle");
+      if (btn) {
+        btn.setAttribute("aria-expanded", String(isOpen));
+        btn.querySelector("span").textContent = isOpen ? "▴" : "▾";
+        btn.firstChild.textContent = isOpen ? "Ocultar plan y ruta " : "Ver plan y ruta ";
+      }
+    });
+  };
+  days.forEach((day, index) => {
+    const btn = day.querySelector(".day-toggle");
+    if (!btn) return;
+    btn.addEventListener("click", () => {
+      const isOpen = day.classList.contains("day-open");
+      if (isOpen) {
+        day.classList.remove("day-open");
+        btn.setAttribute("aria-expanded","false");
+        btn.firstChild.textContent = "Ver plan y ruta ";
+        btn.querySelector("span").textContent = "▾";
+      } else {
+        openDay(index + 1);
+        day.scrollIntoView({behavior:"smooth", block:"start"});
+      }
+    });
+  });
+  const date = getAppDate();
+  const appDay = date >= new Date(2026, 9, 5) && date <= new Date(2026, 9, 8)
+    ? date.getDate() - 4 : 1;
+  openDay(appDay);
+}
+
 function wireMobileActionBar(dayNumber) {
   const bar = document.querySelector("#mobileActionBar");
   if (!bar) return;
@@ -420,8 +457,11 @@ function wireNav() {
         const moreBtn = document.querySelector('.tabbar [data-sheet="sheet-more"]');
         if (daysBtn) daysBtn.classList.toggle("is-on", /^dia[1-4]$/.test(id));
         if (moreBtn) moreBtn.classList.toggle("is-on", ["aparcamientos", "cenas", "planb", "datos", "checkout"].includes(id));
-        if (/^dia[1-4]$/.test(id)) wireMobileActionBar(Number(id));
-        else wireMobileActionBar(0);
+        if (/^dia[1-4]$/.test(id)) {
+          wireMobileActionBar(Number(id));
+          const activeDay = document.querySelector("#" + id);
+          if (activeDay && !activeDay.classList.contains("day-open")) activeDay.querySelector(".day-toggle")?.click();
+        } else wireMobileActionBar(0);
       }
     });
   }, { rootMargin: "-30% 0px -60% 0px" });
@@ -478,6 +518,7 @@ function wireChrome() {
 
 document.addEventListener("DOMContentLoaded", () => {
   wireCalendar();
+  wireDayToggles();
   wireNav();
   wireToday();
   wireOfflineChecklist();
