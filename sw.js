@@ -1,6 +1,6 @@
 /* Val d'Aran en calma — service worker ligero para uso sin conexión.
  * Si cambias la lista SHELL, sube la versión CACHE para forzar la actualización. */
-const CACHE = "aran-v4";
+const CACHE = "aran-v5";
 const SHELL = [
   "./",
   "./index.html",
