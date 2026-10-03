@@ -94,11 +94,11 @@ function wireToday() {
   const steps = document.querySelector("#todaySteps");
   if (!button || !title || !summary || !steps) return;
 
-  const now = new Date();
-  const date = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  const preTrip = new Date(2026, 9, 4);
-  const tripStart = new Date(2026, 9, 5);
-  const tripEnd = new Date(2026, 9, 8);
+  const madridToday = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Madrid", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+  const date = new Date(madridToday + "T00:00:00");
+  const preTrip = new Date("2026-10-04T00:00:00");
+  const tripStart = new Date("2026-10-05T00:00:00");
+  const tripEnd = new Date("2026-10-08T00:00:00");
 
   document.querySelectorAll(".day").forEach(el => el.classList.remove("is-today"));
 
@@ -220,6 +220,34 @@ function renderWeather(data, target, dayIndex) {
   });
 }
 
+const WEATHER_STORAGE_KEY = "aran:last-weather";
+function saveWeatherSnapshot(data) {
+  try { localStorage.setItem(WEATHER_STORAGE_KEY, JSON.stringify({savedAt:new Date().toISOString(),data})); } catch {}
+}
+function loadWeatherSnapshot() {
+  try { const s=JSON.parse(localStorage.getItem(WEATHER_STORAGE_KEY)||"null"); return s?.data?.daily?.time ? s : null; } catch { return null; }
+}
+function weatherAge(iso) {
+  const h=Math.max(0,Math.round((Date.now()-new Date(iso).getTime())/3600000));
+  return h<1 ? "menos de 1 h" : h+" h";
+}
+function updateWeatherSource(text) {
+  document.querySelectorAll(".weather-widget").forEach(w=>{
+    let el=w.querySelector(".weather-source");
+    if(!el){el=document.createElement("span");el.className="weather-source";el.setAttribute("aria-live","polite");w.appendChild(el);}
+    el.textContent=text;
+  });
+}
+function renderTodayWeather(data) {
+  const box=document.querySelector("#todayWeather"); if(!box) return;
+  const iso=new Intl.DateTimeFormat("en-CA",{timeZone:WEATHER.timezone}).format(new Date());
+  const idx=WEATHER.days.indexOf(iso)+1;
+  if(idx>=1&&idx<=4){
+    const source=document.querySelector('.weather-widget[data-weather-day="'+idx+'"]');
+    if(source){const clone=source.cloneNode(true);clone.removeAttribute("data-weather-day");box.innerHTML="";box.appendChild(clone);renderWeather(data,clone,idx);}
+  } else if(iso==="2026-10-04") box.innerHTML='<div class="weather-pretrip">Previsión del viaje disponible para los días 5–8. Mañana empieza el Día 1.</div>';
+}
+
 async function wireWeather() {
   const widgets = [...document.querySelectorAll(".weather-widget")];
   if (!widgets.length) return;
@@ -232,27 +260,24 @@ async function wireWeather() {
     const res = await fetch(url);
     if (!res.ok) throw new Error("weather");
     const data = await res.json();
+    saveWeatherSnapshot(data);
     widgets.forEach(w => renderWeather(data, w, Number(w.dataset.weatherDay)));
-    const todayWeather = document.querySelector("#todayWeather");
-    if (todayWeather) {
-      const now = new Date();
-      const iso = now.toLocaleDateString("sv-SE", {timeZone: WEATHER.timezone});
-      const idx = WEATHER.days.indexOf(iso) + 1;
-      if (idx >= 1 && idx <= 4) {
-        const clone = widgets[idx - 1].cloneNode(true);
-        clone.removeAttribute("data-weather-day");
-        todayWeather.innerHTML = "";
-        todayWeather.appendChild(clone);
-        renderWeather(data, clone, idx);
-      } else if (iso === "2026-10-04") {
-        todayWeather.innerHTML = '<div class="weather-pretrip">Previsión del viaje disponible desde aquí para los días 5–8. Mañana empieza el Día 1.</div>';
-      }
-    }
+    renderTodayWeather(data);
+    updateWeatherSource("Open-Meteo · actualizado ahora");
   } catch {
-    widgets.forEach(w => {
-      w.querySelector(".weather-title").textContent = "Consulta el tiempo antes de salir";
-      w.querySelector(".weather-rain").textContent = "—";
-    });
+    const snapshot = loadWeatherSnapshot();
+    if (snapshot) {
+      widgets.forEach(w => renderWeather(snapshot.data, w, Number(w.dataset.weatherDay)));
+      renderTodayWeather(snapshot.data);
+      updateWeatherSource("Sin conexión · última previsión hace " + weatherAge(snapshot.savedAt));
+    } else {
+      widgets.forEach(w => {
+        w.querySelector(".weather-title").textContent = "Consulta el tiempo antes de salir";
+        w.querySelector(".weather-rain").textContent = "—";
+      });
+      updateWeatherSource("Sin conexión · sin previsión guardada");
+    }
+
   }
 }
 
