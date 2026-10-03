@@ -365,7 +365,9 @@ function wireDayToggles() {
         btn.querySelector("span").textContent = "▾";
       } else {
         openDay(index + 1);
-        day.scrollIntoView({behavior:"smooth", block:"start"});
+        if (location.hash !== "#" + day.id) {
+          day.scrollIntoView({behavior:"smooth", block:"start"});
+        }
       }
     });
   });
