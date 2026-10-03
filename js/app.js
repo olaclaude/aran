@@ -421,7 +421,7 @@ function wireNav() {
         if (daysBtn) daysBtn.classList.toggle("is-on", /^dia[1-4]$/.test(id));
         if (moreBtn) moreBtn.classList.toggle("is-on", ["aparcamientos", "cenas", "planb", "datos", "checkout"].includes(id));
         if (/^dia[1-4]$/.test(id)) wireMobileActionBar(Number(id));
-        else if (moreBtn?.classList.contains("is-on") || id === "hoy") wireMobileActionBar(0);
+        else wireMobileActionBar(0);
       }
     });
   }, { rootMargin: "-30% 0px -60% 0px" });
