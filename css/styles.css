@@ -38,3 +38,11 @@ nav.toc a.active{background:rgba(255,255,255,.18);color:#fff;border-radius:999px
 .decide .cb{width:20px;height:20px;border:2px solid #cfdde0;border-radius:6px;flex:none}
 @media(max-width:560px){.hero-actions .btn{width:100%;justify-content:center}.hero{min-height:62vh}}
 @media(max-width:900px){.day-grid{grid-template-columns:1fr}.photos{grid-template-columns:1fr 1fr}.hero{min-height:55vh}}@media(max-width:560px){.photos{grid-template-columns:1fr}.wrap{padding:0 14px}section{padding-top:40px}}
+/* ===== UI/UX pass · mobile-first route actions ===== */
+.hero-actions{align-items:stretch}.hero-actions .btn{min-height:46px}.hero-actions .btn:first-child{box-shadow:0 5px 18px rgba(0,0,0,.16)}
+.linkrow{align-items:stretch;margin-top:16px}.linkrow a{min-height:44px;justify-content:center;text-align:center}.linkrow a.primary{background:var(--green);box-shadow:0 3px 10px rgba(18,58,44,.12)}
+.linkrow a.primary:hover,.linkrow a.primary:focus-visible{background:var(--dark)}.linkrow a:not(.primary){background:#fff;border:1px solid var(--border);color:var(--green)}
+a:focus-visible,.btn:focus-visible{outline:3px solid #f3b66f;outline-offset:3px}
+.day-head h2{margin:0;flex:1 1 240px}.day-date{white-space:nowrap}.stat-chips{margin:10px 0 2px}.stat{font-size:.88rem}
+.ficha{align-self:start}.ficha h3{margin-top:0}.ficha dl{margin:0}.map-card figcaption{padding:8px 4px 0}
+@media(max-width:560px){.hero{padding-bottom:32px}.hero .seal{left:14px;top:14px;font-size:.72rem;padding:6px 11px}.hero h1{font-size:clamp(2rem,11vw,2.8rem)}.hero .sub{font-size:1rem}.chips{gap:7px}.chip{font-size:.82rem;padding:7px 11px}.hero-actions{gap:8px}.hero-actions .btn{min-height:48px}.toc ul{padding:7px 10px}.toc a{font-size:.88rem}section{scroll-margin-top:58px}.day-head{gap:9px}.day-date{font-size:.88rem}.linkrow{display:grid;grid-template-columns:1fr;gap:8px}.linkrow a{width:100%}.card,.zone,.pcard,.fact,.box{padding:17px}.photos{gap:8px}.photos img,.photo-placeholder{border-radius:11px}.timeline li{padding-left:16px}.stat{padding:6px 10px}}
