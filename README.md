@@ -9,14 +9,18 @@ aran/
 ├── index.html
 ├── css/styles.css
 ├── js/app.js
+├── sw.js                  # service worker (guía usable sin conexión)
+├── manifest.webmanifest   # para instalarla en el móvil
 ├── assets/
-│   ├── photos/             # fotos del viaje
+│   ├── icon.svg           # icono de la app
+│   ├── photos/            # fotos del viaje (pendientes · ver assets/photos/README.md)
 │   └── maps/               # mapas SVG general + días 1–4
-├── presentacion/
-│   └── Val_dAran_5-9_octubre.pptx
 ├── apps-script/Code.gs
 └── README.md
 ```
+
+Fuera del repositorio (binarios originales del proyecto, no versionados a propósito):
+`presentacion/Val_dAran_5-9_octubre.pptx` y las fotografías de `assets/photos/`.
 
 ## Web
 
@@ -24,14 +28,30 @@ La web es HTML/CSS/JS estático y está preparada para GitHub Pages.
 
 En GitHub: **Settings → Pages → Deploy from a branch → main → /(root)**.
 
+## Sin conexión (PWA)
+
+`sw.js` precarga la guía (HTML, CSS, JS y mapas) para abrirla sin cobertura en la montaña:
+las páginas se actualizan desde la red con reserva a la caché y los estáticos se sirven
+primero desde la caché. `manifest.webmanifest` + `assets/icon.svg` permiten instalarla en el
+móvil desde el navegador («Añadir a pantalla de inicio»). Si cambias la lista de archivos
+precargados, sube la versión `CACHE` de `sw.js`.
+
+## Fotos de la galería
+
+Las fotos ilustrativas de la web viven en `assets/photos/` con un nomenclador fijo
+(`cover.jpg`, `day1-1.jpg` … `day4-3.jpg`, `closing.jpg`). Mientras no existan, la web muestra
+un marcador «Foto pendiente de incorporar al proyecto» y el hero degrada a su degradado verde.
+El detalle de cada archivo está en [`assets/photos/README.md`](assets/photos/README.md).
+
 ## Fotos compartidas
 
 Hay dos opciones previstas en `js/app.js`:
 
 - `photosFormUrl`: formulario de Google con subida de archivos.
-- `photoUploadApi`: endpoint opcional de Google Apps Script.
+- `photoUploadApi`: endpoint opcional de Google Apps Script, protegido con `photoUploadToken`.
+- `driveFolderUrl`: carpeta compartida — se muestra en «Cómo usar» y se abre tras subir fotos.
 
-`apps-script/Code.gs` contiene la opción avanzada para guardar automáticamente las fotos en subcarpetas `dia-1` … `dia-4`.
+`apps-script/Code.gs` contiene la opción avanzada para guardar automáticamente las fotos en subcarpetas `dia-1` … `dia-4`. El token (`SHARED_TOKEN` allí, `photoUploadToken` aquí) debe ser el mismo: protege el endpoint frente a subidas ajenas si la URL se filtra.
 
 No pongas URLs privadas ni IDs sensibles de Drive en un repositorio público.
 
@@ -52,5 +72,5 @@ Los botones de cada día generan enlaces de Google Calendar con las fechas del 5
 
 El repositorio se está preparando para que **Arena pueda trabajar directamente sobre GitHub**, sin depender del ZIP adjunto al Issue #1.
 
-Los mapas y la estructura web ya están dentro del repositorio. Las fotografías y el PPTX original siguen siendo binarios del proyecto y no se han sustituido por versiones inventadas.
+Los mapas y la estructura web ya están dentro del repositorio. Las fotografías y el PPTX original son binarios personales: no se versionan ni se han sustituido por versiones inventadas; su hueco y nomenclador están documentados en `assets/photos/README.md`.
 

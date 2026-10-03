@@ -8,6 +8,10 @@ const CONFIG = {
   // directamente a una carpeta de Drive. Ver apps-script/Code.gs y el README.
   photoUploadApi: "",
 
+  // Token compartido con el Apps Script (Opción B). Debe coincidir con SHARED_TOKEN
+  // en apps-script/Code.gs. No lo publiques si el repo es público.
+  photoUploadToken: "",
+
   // Carpeta de Drive compartida que veréis los dos (enlace normal, no de edición).
   driveFolderUrl: "",
 
@@ -19,7 +23,7 @@ const CONFIG = {
       details: "Era Artiga de Lin: recorrido circular muy sencillo de 2,5–3 km entre praderas verdes. Uelhs deth Joèu y tarde tranquila en Arties.",
       location: "Es Bòrdes / Artiga de Lin" },
     { n: 3, start: "20261007", end: "20261008", title: "Saut deth Pish y Vielha",
-      details: "Saut deth Pish: paseo de 1,5 km ida y vuelta y salto de 35 m. Tarde en Vielha; cena Sidreria Era Bruisha (reserva).",
+      details: "Saut deth Pish: paseo de 1,2 km ida y vuelta y dos caídas que suman unos 25 m. Tarde en Vielha; cena Sidreria Era Bruisha (reserva).",
       location: "Plan des Artiguetes / Vielha" },
     { n: 4, start: "20261008", end: "20261009", title: "Bassa d'Oles, Bagergue y Garòs",
       details: "Bassa d'Oles: circular llano de 1,2 km. Tarde en Bagergue y parada en Garòs; también podéis hacer versión relajada.",
@@ -42,16 +46,27 @@ function wireUploads() {
       el.setAttribute("href", "#como");
       el.setAttribute("title", "Falta configurar el formulario de fotos (ver README)");
       el.classList.add("needs-config");
-    }
-  });
-  if (!hasApi && !hasForm) {
-    document.querySelectorAll("[data-upload]").forEach((el) => {
       el.addEventListener("click", (ev) => {
         ev.preventDefault();
         showToast("Las fotos compartidas todavía no están conectadas. Falta añadir un único enlace de Google Forms en la configuración.");
-      }, { once: false });
-    });
-  }
+      });
+    }
+  });
+}
+
+function wireDriveLink() {
+  document.querySelectorAll("[data-drive]").forEach((el) => {
+    if (CONFIG.driveFolderUrl) {
+      el.setAttribute("href", CONFIG.driveFolderUrl);
+      el.setAttribute("target", "_blank");
+      el.setAttribute("rel", "noopener");
+    } else {
+      el.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        showToast("Falta configurar driveFolderUrl en js/app.js (enlace normal, no de edición, de la carpeta compartida).");
+      });
+    }
+  });
 }
 
 function showToast(message) {
@@ -109,11 +124,23 @@ function pickAndUpload() {
   input.accept = "image/*";
   input.multiple = true;
   input.onchange = async () => {
+    const day = prompt("¿A qué día pertenecen estas fotos? (1, 2, 3 o 4)", "1") || "1";
+    let ok = 0;
+    let fail = 0;
     for (const file of input.files) {
-      const day = prompt("¿Qué día es? (1, 2, 3 o 4)", "1") || "1";
-      await uploadPhoto(file, day);
+      try {
+        await uploadPhoto(file, day);
+        ok++;
+      } catch (err) {
+        fail++;
+      }
     }
-    alert("¡Fotos subidas! Ya las veréis los dos en Drive.");
+    if (fail === 0) {
+      alert("¡Fotos subidas! Ya las veréis los dos en Drive.");
+      if (CONFIG.driveFolderUrl) window.open(CONFIG.driveFolderUrl, "_blank", "noopener");
+    } else {
+      showToast(`Subidas ${ok} · con error ${fail}. Reintentad las que fallen.`);
+    }
   };
   input.click();
 }
@@ -129,6 +156,7 @@ async function uploadPhoto(file, day) {
     image: dataUrl.split(",")[1],
     contentType: file.type,
     name: `dia${day}-${Date.now()}-${file.name.replace(/[^\w.\-]/g, "_")}`,
+    token: CONFIG.photoUploadToken,
   };
   const r = await fetch(CONFIG.photoUploadApi, {
     method: "POST",
@@ -171,10 +199,19 @@ function wireNav() {
   document.querySelectorAll("section[id]").forEach((s) => obs.observe(s));
 }
 
+function wireServiceWorker() {
+  if (!("serviceWorker" in navigator)) return;
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("sw.js").catch(() => {});
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   wireUploads();
+  wireDriveLink();
   wireCalendar();
   wireNav();
   wireToday();
   wireImageFallbacks();
+  wireServiceWorker();
 });
