@@ -2396,3 +2396,9 @@ html, body { overflow-x: clip; }
 @media (min-width:900px){.day-aside{position:sticky;top:84px;align-self:start}}
 @media (max-width:899px){.stat-chips{width:100%;max-width:100%;margin:0}.stat-chips .stat{flex:0 1 auto;max-width:100%}}
 @media (max-width:470px){.stat-chips{gap:6px;width:100%;overflow:visible;margin-left:0}.stat-chips .stat{max-width:100%;padding:6px 8px;font-size:.7rem}}
+
+
+/* Orden real de la tarjeta del día: cabecera siempre primero. */
+.day > .day-card-head { order: -1; }
+/* Botón del alojamiento en su propia línea también en escritorio. */
+.arrival-drive { display: flex; align-items: center; gap: 7px; width: max-content; max-width: 100%; margin-top: 8px; box-sizing: border-box; }
