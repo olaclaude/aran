@@ -2,19 +2,6 @@
 const CONFIG = {
   // OPCIÓN A (recomendada): enlace de tu formulario de Google con subida de archivos.
   // Crear en forms.google.com → Enviar → enlace. Ver README, paso 4.
-  photosFormUrl: "",
-
-  // OPCIÓN B (avanzada): URL de una app web de Google Apps Script que sube las fotos
-  // directamente a una carpeta de Drive. Ver apps-script/Code.gs y el README.
-  photoUploadApi: "",
-
-  // Token compartido con el Apps Script (Opción B). Debe coincidir con SHARED_TOKEN
-  // en apps-script/Code.gs. No lo publiques si el repo es público.
-  photoUploadToken: "",
-
-  // Carpeta de Drive compartida que veréis los dos (enlace normal, no de edición).
-  driveFolderUrl: "",
-
   days: [
     { n: 1, start: "20261005", end: "20261006", title: "Llegada y Camin dera Bruisha",
       details: "Check-in en Salardú. Paseo circular Cami de les Bruixes (~2 km llano) y Salto de Tredós. Cena: Terrasseta dera Bruisha (Tredòs).",
@@ -30,54 +17,6 @@ const CONFIG = {
       location: "Bassa d'Oles / Bagergue" },
   ],
 };
-
-function wireUploads() {
-  const hasApi = !!CONFIG.photoUploadApi;
-  const hasForm = !!CONFIG.photosFormUrl;
-  document.querySelectorAll("[data-upload]").forEach((el) => {
-    if (hasApi) {
-      el.setAttribute("href", "#");
-      el.addEventListener("click", (ev) => { ev.preventDefault(); pickAndUpload(); });
-    } else if (hasForm) {
-      el.setAttribute("href", CONFIG.photosFormUrl);
-      el.setAttribute("target", "_blank");
-      el.setAttribute("rel", "noopener");
-    } else {
-      el.setAttribute("href", "#como");
-      el.setAttribute("title", "Falta configurar el formulario de fotos (ver README)");
-      el.classList.add("needs-config");
-      el.addEventListener("click", (ev) => {
-        ev.preventDefault();
-        showToast("Las fotos compartidas todavía no están conectadas. Falta añadir un único enlace de Google Forms en la configuración.");
-      });
-    }
-  });
-}
-
-function wireDriveLink() {
-  document.querySelectorAll("[data-drive]").forEach((el) => {
-    if (CONFIG.driveFolderUrl) {
-      el.setAttribute("href", CONFIG.driveFolderUrl);
-      el.setAttribute("target", "_blank");
-      el.setAttribute("rel", "noopener");
-    } else {
-      el.addEventListener("click", (ev) => {
-        ev.preventDefault();
-        showToast("Falta configurar driveFolderUrl en js/app.js (enlace normal, no de edición, de la carpeta compartida).");
-      });
-    }
-  });
-}
-
-function showToast(message) {
-  const old = document.querySelector(".toast");
-  if (old) old.remove();
-  const t = document.createElement("div");
-  t.className = "toast";
-  t.textContent = message;
-  document.body.appendChild(t);
-  window.setTimeout(() => t.remove(), 4200);
-}
 
 function wireToday() {
   const button = document.querySelector("#todayButton");
@@ -207,8 +146,6 @@ function wireServiceWorker() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  wireUploads();
-  wireDriveLink();
   wireCalendar();
   wireNav();
   wireToday();
