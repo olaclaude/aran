@@ -649,7 +649,7 @@ section h2, .day-title h2 {
 .weather-title { display: block; margin-top: 1px; color: var(--pine); font-size: 1.05rem; }
 .weather-stats {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 8px;
   margin-top: 12px;
 }
@@ -2031,7 +2031,7 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
   .day-card-head .stat-chips::-webkit-scrollbar { display:none; }
   .day-card-head .stat { white-space:nowrap; font-size:.76rem; padding:5px 9px; }
   .day > .weather-widget { padding:12px 16px; grid-template-columns:1fr; gap:10px; }
-  .day > .weather-widget .weather-stats { display:grid; grid-template-columns:repeat(3,1fr); }
+  .day > .weather-widget .weather-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); }
   .day > .weather-widget .weather-stats span { min-width:0; }
   .day > .weather-widget .weather-link { font-size:.8rem; }
   .day-content { grid-template-columns:1fr; padding:14px 12px 0; }
@@ -2207,7 +2207,7 @@ body.is-offline .map-lock{display:none}
   }
   .day > .weather-widget .weather-stats {
     display: grid !important;
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
     width: 100%;
   }
   .day > .weather-widget .weather-stats span {
