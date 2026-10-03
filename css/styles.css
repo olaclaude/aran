@@ -1330,3 +1330,237 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
 
 /* Prevent stale browser styling from ever turning route icons into giant tiles. */
 .route-actions svg.ico { width: 20px; height: 20px; flex: 0 0 20px; }
+
+/* === Premium itinerary v2: one clear visual language for every day === */
+.day {
+  position: relative;
+  margin-top: 52px;
+  padding: 22px 0 30px;
+  border-top: 1px solid rgba(23,56,44,.14);
+}
+.day::before {
+  content: "";
+  position: absolute;
+  inset: 0 -16px;
+  z-index: -1;
+  border-radius: 28px;
+  background: linear-gradient(180deg, rgba(247,244,237,.82), rgba(255,255,255,.25));
+  border: 1px solid rgba(23,56,44,.07);
+}
+.day-head { margin-bottom: 2px; }
+.day-title h2 { margin-bottom: 0; }
+.stat-chips { margin: 12px 0 0; }
+.stat { background: rgba(255,255,255,.78); border-color: rgba(23,56,44,.12); }
+
+/* The day now reads in a fixed order: identity → weather → what we see → plan → map/practical → actions. */
+.day {
+  display: flex;
+  flex-direction: column;
+}
+.day > .day-head { order: 1; }
+.day > .stat-chips { order: 2; }
+.day > .weather-widget { order: 3; }
+.day > .visit-strip { order: 4; }
+.day > .day-grid { order: 5; }
+.day > .day-actions { order: 6; }
+
+.visit-strip {
+  margin-top: 12px;
+  padding: 14px;
+  border-radius: 18px;
+  background: #17382c;
+  color: #f7f3ea;
+  box-shadow: 0 8px 24px rgba(23,56,44,.10);
+}
+.visit-kicker {
+  display: block;
+  margin-bottom: 9px;
+  color: rgba(247,243,234,.68);
+  font-size: .67rem;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.visit-items {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0,1fr));
+  gap: 8px;
+}
+.visit-items > span {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.075);
+  border: 1px solid rgba(255,255,255,.10);
+}
+.visit-items b {
+  font-size: .86rem;
+  line-height: 1.15;
+}
+.visit-items small {
+  color: rgba(247,243,234,.68);
+  font-size: .7rem;
+  line-height: 1.25;
+}
+
+.weather-widget {
+  order: 3;
+  margin-top: 12px;
+  border: 1px solid rgba(23,56,44,.10);
+  background: rgba(255,255,255,.92);
+}
+.weather-main { min-height: 42px; }
+.weather-link { font-size: .72rem; }
+
+.day-grid {
+  margin-top: 12px;
+  grid-template-columns: minmax(0,1fr);
+  gap: 12px;
+}
+.day-grid > .card {
+  width: 100%;
+}
+.day-grid > .card:first-child {
+  border-top: 3px solid #b56d45;
+}
+.day-grid > .ficha {
+  border-top: 3px solid #17382c;
+}
+.card {
+  border: 1px solid rgba(23,56,44,.10);
+  box-shadow: 0 5px 18px rgba(23,56,44,.055);
+}
+.card h3 {
+  letter-spacing: -.015em;
+}
+.timeline {
+  margin-top: 4px;
+}
+.timeline li {
+  padding-bottom: 14px;
+}
+.timeline .when {
+  color: #b56d45;
+}
+.factday {
+  background: rgba(181,109,69,.07);
+  border-color: rgba(181,109,69,.16);
+}
+
+/* Make the map a clearly identified destination card, not an incidental image. */
+.map-card {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(23,56,44,.10);
+}
+.map-card::before {
+  content: "Mapa · alojamiento → punto de salida";
+  display: block;
+  margin-bottom: 8px;
+  color: #17382c;
+  font-size: .68rem;
+  font-weight: 800;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+.map-frame {
+  min-height: 230px;
+  border-radius: 16px;
+}
+.map-card figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  align-items: center;
+}
+.map-open {
+  font-weight: 800;
+}
+
+/* Actions are the final, obvious hand-off to the external apps. */
+.day-actions {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(23,56,44,.055);
+  border: 1px solid rgba(23,56,44,.10);
+}
+.day-actions .route-label {
+  color: #17382c;
+  font-weight: 800;
+}
+.day-actions a.primary {
+  min-height: 50px;
+  border-radius: 14px;
+  font-size: .84rem;
+  font-weight: 800;
+}
+.day-actions a.is-drive {
+  background: #17382c;
+  color: #fff;
+}
+.day-actions a.is-walk {
+  background: #b56d45;
+  color: #fff;
+}
+.day-actions a[data-cal] {
+  opacity: .78;
+}
+
+/* Desktop can use two columns for content, while mobile stays a clean reading sequence. */
+@media (min-width: 760px) {
+  .day::before { inset: 0 -24px; }
+  .day-grid { grid-template-columns: minmax(0,1.08fr) minmax(300px,.72fr); }
+  .day-actions {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(220px,.8fr) minmax(220px,.8fr);
+    align-items: center;
+    gap: 9px;
+  }
+  .day-actions .route-label {
+    grid-column: 1 / -1;
+  }
+  .day-actions a[data-cal] {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 759px) {
+  .day { margin-top: 38px; padding-top: 18px; }
+  .day::before { inset: 0 -10px; border-radius: 22px; }
+  .visit-strip { padding: 12px; border-radius: 16px; }
+  .visit-items {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  .visit-items > span {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 8px 9px;
+  }
+  .visit-items small { text-align: right; }
+  .day-grid { margin-top: 10px; }
+  .map-frame { min-height: 210px; }
+  .day-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+  }
+  .day-actions .route-label {
+    grid-column: 1 / -1;
+  }
+  .day-actions a.primary {
+    min-height: 48px;
+  }
+  .day-actions a[data-cal] {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+}
