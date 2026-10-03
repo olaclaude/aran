@@ -1,0 +1,19 @@
+{
+  "name": "Val d'Aran en calma · 5–9 octubre 2026",
+  "short_name": "Val d'Aran",
+  "description": "Guía personal del viaje al Val d'Aran: plan día a día, rutas cortas, aparcamientos, cenas y plan B.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#f6f4ee",
+  "theme_color": "#1e4d3b",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
