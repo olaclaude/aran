@@ -338,6 +338,32 @@ async function wireWeather() {
   }
 }
 
+function wireQuickActions() {
+  document.querySelectorAll(".day[id^=\"dia\"]").forEach((day) => {
+    const box = day.querySelector(".day-quick-actions");
+    if (!box) return;
+    box.innerHTML = "";
+    const map = day.querySelector(".map-open");
+    const routeLinks = [...day.querySelectorAll(".route-buttons a")];
+    if (map) {
+      const a = document.createElement("a");
+      a.href = "#mapa-" + day.id;
+      a.className = "quick-link quick-map";
+      a.textContent = "Ver mapa";
+      box.appendChild(a);
+    }
+    routeLinks.forEach((source) => {
+      const a = document.createElement("a");
+      a.href = source.href;
+      a.className = "quick-link " + (source.classList.contains("is-drive") ? "quick-drive" : "quick-walk");
+      a.textContent = source.classList.contains("is-drive") ? "Cómo llegar" : "Wikiloc";
+      a.target = "_blank";
+      a.rel = "noopener";
+      box.appendChild(a);
+    });
+  });
+}
+
 function wireDayToggles() {
   const days = [...document.querySelectorAll(".day[id^=\"dia\"]")];
   if (!days.length) return;
@@ -520,6 +546,7 @@ function wireChrome() {
 
 document.addEventListener("DOMContentLoaded", () => {
   wireCalendar();
+  wireQuickActions();
   wireDayToggles();
   wireNav();
   wireToday();
@@ -529,7 +556,12 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("offline", updateOfflineState);
   const appDate = getAppDate();
   const appDay = appDate >= new Date(2026, 9, 5) && appDate <= new Date(2026, 9, 8) ? appDate.getDate() - 4 : 0;
-  wireMobileActionBar(appDay);
+  const hashDay = /^#dia[1-4]$/.test(location.hash) ? Number(location.hash.replace("#dia","")) : 0;
+  wireMobileActionBar(hashDay || appDay);
+  window.addEventListener("hashchange", () => {
+    const n = /^#dia[1-4]$/.test(location.hash) ? Number(location.hash.replace("#dia","")) : 0;
+    if (n) wireMobileActionBar(n);
+  });
   wireWeather();
   wireChrome();
   wireServiceWorker();
