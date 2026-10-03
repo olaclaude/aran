@@ -2,7 +2,7 @@
  * Si cambias la lista SHELL, sube la versión CACHE para forzar la actualización.
  * Los mapas de Google y otros contenidos de terceros no se cachean.
  * Open-Meteo sí puede conservar la última previsión correcta para consulta offline. */
-const CACHE = "aran-v18";
+const CACHE = "aran-v19";
 const SHELL = [
   "./",
   "./index.html",
