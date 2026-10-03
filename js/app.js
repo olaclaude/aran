@@ -73,8 +73,8 @@ function wireToday() {
     title.textContent = "Hoy · preparar la salida";
     summary.textContent = "Mañana salís desde Sant Feliu de Guíxols. Dejad Wikiloc preparado antes de salir.";
     steps.innerHTML = "";
-    addStep(steps, "Mañana · coche", "Sant Feliu de Guíxols → alojamiento en Salardú", mapsRoute(CONFIG.home, CONFIG.hotel), "step-button primary");
-    addStep(steps, "Antes de salir", "Guardar las 4 rutas y el mapa offline en Wikiloc", null);
+    addStep(steps, "🚗 Mañana · coche", "Sant Feliu de Guíxols → alojamiento en Salardú", mapsRoute(CONFIG.home, CONFIG.hotel), "step-button primary");
+    addStep(steps, "🥾 Antes de salir", "Guardar las 4 rutas y el mapa offline en Wikiloc", null);
     return;
   }
 
@@ -83,10 +83,11 @@ function wireToday() {
     button.textContent = "Abrir ruta al alojamiento ↓";
     note.textContent = "Hoy: salida desde Sant Feliu de Guíxols → Salardú.";
     title.textContent = "HOY · salida al Val d'Aran";
-    summary.textContent = "Primero el coche. Al llegar, check-in y descanso. La ruta de senderismo corresponde al Día 1.";
+    summary.textContent = "🚗 Salida primero. Al llegar: check-in, descanso y paseo corto.";
     steps.innerHTML = "";
-    addStep(steps, "Coche", "Sant Feliu de Guíxols → Carretera de Bagergue, 3, Salardú", mapsRoute(CONFIG.home, CONFIG.hotel), "step-button primary");
-    addStep(steps, "Al llegar", "Check-in, descanso y después Camin dera Bruisha", CONFIG.days[0].wikiloc, "step-button");
+    addStep(steps, "🚗 Coche", "Sant Feliu de Guíxols → Carretera de Bagergue, 3, Salardú", mapsRoute(CONFIG.home, CONFIG.hotel), "step-button primary");
+    addStep(steps, "🥾 Al llegar", "Check-in, descanso y Camin dera Bruisha", CONFIG.days[0].wikiloc, "step-button");
+    addStep(steps, "🍽️ Noche", "Cena informal en Terrasseta dera Bruisha", null);
     return;
   }
 
@@ -102,11 +103,23 @@ function wireToday() {
     title.textContent = "HOY · Día " + n;
     summary.textContent = day.summary;
     steps.innerHTML = "";
+
     if (n === 1) {
-      addStep(steps, "Al llegar", "Check-in y paseo corto a pie", day.wikiloc, "step-button primary");
-    } else {
-      addStep(steps, "Después del desayuno · coche", "Salardú → " + day.location, day.drive, "step-button primary");
-      addStep(steps, "Después del coche · ruta", "Abrir el track de Wikiloc", day.wikiloc, "step-button");
+      addStep(steps, "🥾 Mañana", "Llegada, check-in y paseo corto a pie por Camin dera Bruisha", day.wikiloc, "step-button primary");
+      addStep(steps, "☕ Después", "Vuelta al alojamiento y descanso sin prisas", null);
+      addStep(steps, "🍽️ Noche", "Cena informal en Tredòs", null);
+    } else if (n === 2) {
+      addStep(steps, "🚗 Después del desayuno", "Salardú → Uelhs deth Joèu / Era Artiga de Lin", day.drive, "step-button primary");
+      addStep(steps, "🥾 Después del coche", "Ruta circular por Artiga de Lin + Uelhs deth Joèu", day.wikiloc, "step-button");
+      addStep(steps, "🍽️ Tarde", "Vuelta, ducha y paseo tranquilo por Arties", null);
+    } else if (n === 3) {
+      addStep(steps, "🚗 Después del desayuno", "Salardú → Plan des Artiguetes", day.drive, "step-button primary");
+      addStep(steps, "🥾 Después del coche", "Ruta al Saut deth Pish", day.wikiloc, "step-button");
+      addStep(steps, "🍽️ Tarde", "Vuelta, ducha y tarde/cena en Vielha", null);
+    } else if (n === 4) {
+      addStep(steps, "🚗 Después del desayuno", "Salardú → Bassa d'Oles", day.drive, "step-button primary");
+      addStep(steps, "🥾 Después del coche", "Paseo circular por la Bassa d'Oles", day.wikiloc, "step-button");
+      addStep(steps, "🍽️ Tarde", "Bagergue + Garòs · plan completo o relajado", null);
     }
     return;
   }
@@ -119,7 +132,6 @@ function wireToday() {
   steps.innerHTML = "";
   addStep(steps, "Viernes 9", "Check-out · decidir la continuación según tiempo y ganas", null);
 }
-
 
 const WEATHER = {
   lat: 42.70,
