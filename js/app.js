@@ -353,7 +353,9 @@ function wireMobileActionBar(dayNumber) {
   const clone = source.cloneNode(true);
   clone.classList.add("mobile-route-buttons");
   clone.querySelectorAll("[data-cal]").forEach((el) => el.remove());
-  clone.querySelectorAll("a").forEach((a) => {
+  const actionLinks = clone.querySelectorAll("a");
+  if (actionLinks.length === 1) clone.classList.add("single-action");
+  actionLinks.forEach((a) => {
     const isDrive = a.classList.contains("is-drive");
     a.textContent = isDrive ? "Coche" : "Wikiloc";
     a.prepend(iconEl(isDrive ? "car" : "boot"));
