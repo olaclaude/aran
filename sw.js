@@ -1,7 +1,8 @@
 /* Val d'Aran en calma — service worker ligero para uso sin conexión.
  * Si cambias la lista SHELL, sube la versión CACHE para forzar la actualización.
- * Los mapas de Google no se cachean: son de otro origen y piden conexión. */
-const CACHE = "aran-v7";
+ * Los mapas de Google y otros contenidos de terceros no se cachean.
+ * Open-Meteo sí puede conservar la última previsión correcta para consulta offline. */
+const CACHE = "aran-v8";
 const SHELL = [
   "./",
   "./index.html",
@@ -38,6 +39,22 @@ self.addEventListener("fetch", (ev) => {
   const req = ev.request;
   if (req.method !== "GET") return;
   const url = new URL(req.url);
+
+  // Tiempo: conservar la última respuesta correcta para poder consultar la previsión sin cobertura.
+  if (url.origin === "https://api.open-meteo.com") {
+    ev.respondWith(
+      caches.open(CACHE).then((cache) =>
+        fetch(req)
+          .then((res) => {
+            if (res.ok) cache.put(req, res.clone());
+            return res;
+          })
+          .catch(() => cache.match(req))
+      )
+    );
+    return;
+  }
+
   if (url.origin !== self.location.origin) return;
 
   // Navegación: red primero (guía viva), caché si no hay conexión.
