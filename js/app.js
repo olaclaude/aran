@@ -419,7 +419,9 @@ function wireNav() {
         const daysBtn = document.querySelector('.tabbar [data-sheet="sheet-days"]');
         const moreBtn = document.querySelector('.tabbar [data-sheet="sheet-more"]');
         if (daysBtn) daysBtn.classList.toggle("is-on", /^dia[1-4]$/.test(id));
-        if (moreBtn) moreBtn.classList.toggle("is-on", ["como", "aparcamientos", "cenas", "planb", "datos", "checkout"].includes(id));
+        if (moreBtn) moreBtn.classList.toggle("is-on", ["aparcamientos", "cenas", "planb", "datos", "checkout"].includes(id));
+        if (/^dia[1-4]$/.test(id)) wireMobileActionBar(Number(id));
+        else if (moreBtn?.classList.contains("is-on") || id === "hoy") wireMobileActionBar(0);
       }
     });
   }, { rootMargin: "-30% 0px -60% 0px" });
