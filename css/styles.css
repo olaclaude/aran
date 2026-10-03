@@ -2370,3 +2370,21 @@ html, body { overflow-x: clip; }
  .day:not(.day-open) .day-layout>.day-content,.day:not(.day-open) .day-layout>.factday{display:flex}
  .day .day-aside>.weather-widget .weather-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+
+/* ===== Corrección Día 1 + tira de días ===== */
+@media (max-width:899px) {
+  .arrival-drive { display:flex; align-items:center; justify-content:center; gap:7px; width:max-content; max-width:100%; margin-top:8px; box-sizing:border-box; }
+}
+@media (max-width:470px) {
+  .journey {
+    width:100%;
+    max-width:100%;
+    box-sizing:border-box;
+    margin-left:0;
+    margin-right:0;
+    overflow-x:auto;
+    scroll-snap-type:x proximity;
+    scrollbar-width:none;
+  }
+  .journey a { scroll-snap-align:start; }
+}

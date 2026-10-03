@@ -375,6 +375,19 @@ function wireDayToggles() {
   openDay(appDay);
 }
 
+function wireDayOneArrival() {
+  const section = document.querySelector("#dia1");
+  const firstStep = section?.querySelector(".timeline li:first-child .what");
+  if (!firstStep || firstStep.querySelector(".arrival-drive")) return;
+  const a = document.createElement("a");
+  a.className = "step-button primary arrival-drive";
+  a.href = mapsRoute(CONFIG.home, CONFIG.hotel);
+  a.target = "_blank";
+  a.rel = "noopener";
+  a.classList.add("arrival-drive");
+  a.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-car"/></svg><span>Ir al alojamiento · Google Maps</span>';
+  firstStep.appendChild(a);
+}
 function wireMobileActionBar(dayNumber) {
   const bar = document.querySelector("#mobileActionBar");
   if (!bar) return;
@@ -392,11 +405,19 @@ function wireMobileActionBar(dayNumber) {
   const clone = source.cloneNode(true);
   clone.classList.add("mobile-route-buttons");
   clone.querySelectorAll("[data-cal]").forEach((el) => el.remove());
-  const actionLinks = clone.querySelectorAll("a");
-  if (actionLinks.length === 1) clone.classList.add("single-action");
-  actionLinks.forEach((a) => {
+  const actionLinks = [...clone.querySelectorAll("a")];
+  if (dayNumber === 1) {
+    const arrival = document.createElement("a");
+    arrival.href = mapsRoute(CONFIG.home, CONFIG.hotel);
+    arrival.className = "primary is-drive";
+    arrival.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-car"/></svg><span>Alojamiento</span>';
+    clone.insertBefore(arrival, clone.firstChild);
+  }
+  const allLinks = clone.querySelectorAll("a");
+  if (allLinks.length === 1) clone.classList.add("single-action");
+  allLinks.forEach((a) => {
     const isDrive = a.classList.contains("is-drive");
-    a.textContent = isDrive ? "Coche" : "Wikiloc";
+    a.textContent = isDrive ? (dayNumber === 1 ? "Alojamiento" : "Coche") : "Wikiloc";
     a.prepend(iconEl(isDrive ? "car" : "boot"));
     a.removeAttribute("target");
     a.removeAttribute("rel");
@@ -520,6 +541,7 @@ function wireChrome() {
 
 document.addEventListener("DOMContentLoaded", () => {
   wireCalendar();
+  wireDayOneArrival();
   wireDayToggles();
   wireNav();
   wireToday();
