@@ -16,6 +16,17 @@ La presentación original del viaje (`Val_dAran_5-9_octubre.pptx`) es un archivo
 - **8 oct. · Día 4:** Bassa d'Oles, Bagergue y Garòs.
 - **9 oct.:** check-out y continuación libre del viaje hasta el día 15.
 
+## Auditoría de rutas — 3 de octubre de 2026
+
+Se revisaron los cuatro enlaces de Wikiloc usados por la interfaz y se sustituyeron por tracks públicos que encajan mejor con las distancias y el carácter de la planificación:
+
+- Día 1 · **Camí de les Bruixes - Tredós** — 2,304 km · fácil · circular.
+- Día 2 · **Artiga de Lin y Ojos del Diablo** — 2,82 km · fácil · circular.
+- Día 3 · **Eth Saut deth Pish** — 1,562 km · fácil · circular.
+- Día 4 · **Lago Bassa D'Oles** — 0,835 km · fácil · circular.
+
+Las distancias anteriores son las del track de Wikiloc enlazado, no sustituyen las cifras de la presentación original. La presentación mantiene, entre otros datos, ≈2 km para el Día 1, 2,5–3 km para el Día 2, 1,5 km/35 m para el Día 3 y 1,2 km para el Día 4. Cuando ambas fuentes no coinciden, no se debe presentar el dato del track como si fuera la cifra de la planificación.
+
 ## Arquitectura
 
 ```
@@ -128,7 +139,7 @@ Los botones de cada día generan enlaces de Google Calendar para las actividades
 
 `manifest.webmanifest` + `assets/icon.svg` permiten instalar la web desde el navegador como aplicación en el móvil.
 
-Si se añaden o eliminan recursos precargados en el service worker, actualizar la versión de `CACHE` en `sw.js`.
+Si se añaden o eliminan recursos precargados en el service worker, actualizar la versión de `CACHE` en `sw.js`. La previsión de Open-Meteo también conserva la última respuesta correcta en la caché para consulta sin conexión.
 
 ### Límite importante del modo offline
 
