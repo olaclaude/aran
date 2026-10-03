@@ -1907,3 +1907,144 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
   .day { padding:24px; }
   .day-map .map-frame { min-height:290px; }
 }
+
+
+/* ===== Itinerario premium v2 ===== */
+.day {
+  --day-bg: color-mix(in srgb, var(--day) 7%, var(--card));
+  margin: 62px 0 0;
+  padding: 0;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--day);
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 18px 44px rgba(28,25,20,.07);
+}
+.day + .day { margin-top: 34px; }
+.day-card-head {
+  padding: 24px 24px 20px;
+  background: linear-gradient(135deg, var(--day-bg), var(--card) 70%);
+  border-bottom: 1px solid var(--line);
+}
+.day-identity { display:flex; gap:16px; align-items:center; }
+.day-index {
+  display:grid; place-items:center; flex:none;
+  width:58px; height:58px; border-radius:18px;
+  background:var(--day); color:#fff;
+  font-size:1.65rem; line-height:1;
+  box-shadow:0 8px 20px color-mix(in srgb, var(--day) 22%, transparent);
+}
+.day-title h2 { margin-top:3px; }
+.day-date { margin:3px 0 5px; }
+.day-badge { padding:4px 9px; }
+.day-card-head .stat-chips { margin-top:16px; }
+.day-card-head .stat { background:#fff; border:1px solid var(--line); color:var(--day); }
+
+.day > .weather-widget {
+  margin:0;
+  border:0;
+  border-bottom:1px solid var(--line);
+  border-radius:0;
+  box-shadow:none;
+  background:#fbfaf6;
+  padding:14px 24px;
+  display:grid;
+  grid-template-columns:1fr auto auto;
+  align-items:center;
+  gap:16px;
+}
+.day > .weather-widget .weather-stats { margin:0; display:flex; gap:8px; }
+.day > .weather-widget .weather-stats span { min-width:76px; }
+.day > .weather-widget .weather-link { margin:0; white-space:nowrap; }
+
+.day-content {
+  display:grid;
+  grid-template-columns:minmax(0,1.65fr) minmax(270px,.9fr);
+  gap:14px;
+  padding:18px 24px 0;
+}
+.day-block {
+  background:#fffdf9;
+  border:1px solid var(--line);
+  border-radius:18px;
+  padding:18px;
+}
+.day-planning { background:var(--day-bg); border-color:color-mix(in srgb, var(--day) 16%, var(--line)); }
+.day-side { display:grid; gap:14px; }
+.block-head,.route-card-head,.route-launch-title { display:flex; gap:10px; align-items:center; }
+.block-number {
+  display:grid; place-items:center; flex:none;
+  width:30px; height:30px; border-radius:10px;
+  background:var(--day); color:#fff;
+  font-size:.72rem; font-weight:700;
+}
+.block-head h3,.route-card h3 { margin:0; font-size:1.15rem; }
+.block-kicker { margin:0; }
+.day-block .timeline { margin-top:15px; }
+.visit-card .visit-list { margin-top:14px; }
+.visit-list { display:grid; gap:10px; }
+.visit-list > div { padding:11px 12px; border-radius:12px; background:#f7f3eb; border-left:3px solid var(--day); }
+.visit-list b,.visit-list span { display:block; }
+.visit-list span { color:var(--muted); font-size:.84rem; margin-top:1px; }
+.note-card dl { margin:14px 0 0; display:grid; grid-template-columns:1fr; gap:8px; }
+.note-card dt { color:var(--day); font-size:.72rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; }
+.note-card dd { margin: -5px 0 3px; }
+.day > .route-card {
+  margin:18px 24px 24px;
+  border:1px solid var(--line);
+  border-radius:20px;
+  overflow:hidden;
+  background:#fff;
+}
+.route-card-head { padding:16px 18px; background:#f7f4ee; }
+.route-card-head p { margin:2px 0 0; color:var(--muted); font-size:.9rem; }
+.route-card .map-card { margin:0; padding:0; border:0; box-shadow:none; border-radius:0; }
+.route-card .map-frame { border:0; border-radius:0; aspect-ratio:16/7; min-height:220px; }
+.route-card figcaption { padding:9px 14px; border-top:1px solid var(--line); }
+.route-launch {
+  display:grid; grid-template-columns:minmax(240px,.8fr) 1.2fr;
+  gap:16px; align-items:center;
+  padding:15px 18px; border-top:1px solid var(--line);
+  background:var(--day-bg);
+}
+.route-launch-title strong,.route-launch-title p { display:block; }
+.route-launch-title strong { font-size:1rem; }
+.route-launch-title p { margin:1px 0 0; color:var(--muted); font-size:.84rem; }
+.route-buttons { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; }
+.route-buttons a {
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  min-height:46px; padding:9px 12px; border-radius:12px;
+  text-decoration:none; font-weight:700;
+  border:1px solid var(--line); background:#fff; color:var(--pine);
+}
+.route-buttons a.is-drive { background:var(--pine); color:#fff; border-color:var(--pine); }
+.route-buttons a.is-walk { background:var(--gold-deep); color:#fff; border-color:var(--gold-deep); }
+.route-buttons a:hover { transform:translateY(-1px); }
+
+@media (max-width: 720px) {
+  .day { margin-top:46px; border-radius:22px; }
+  .day-card-head { padding:18px 16px 16px; }
+  .day-identity { gap:12px; align-items:flex-start; }
+  .day-index { width:50px; height:50px; border-radius:15px; font-size:1.35rem; }
+  .day-card-head .stat-chips { flex-wrap:nowrap; overflow-x:auto; margin-left:62px; scrollbar-width:none; }
+  .day-card-head .stat-chips::-webkit-scrollbar { display:none; }
+  .day-card-head .stat { white-space:nowrap; font-size:.76rem; padding:5px 9px; }
+  .day > .weather-widget { padding:12px 16px; grid-template-columns:1fr; gap:10px; }
+  .day > .weather-widget .weather-stats { display:grid; grid-template-columns:repeat(3,1fr); }
+  .day > .weather-widget .weather-stats span { min-width:0; }
+  .day > .weather-widget .weather-link { font-size:.8rem; }
+  .day-content { grid-template-columns:1fr; padding:14px 12px 0; }
+  .day-block { padding:15px; border-radius:16px; }
+  .day-side { grid-template-columns:1fr 1fr; }
+  .day > .route-card { margin:14px 12px 16px; border-radius:17px; }
+  .route-card-head { padding:13px 14px; }
+  .route-card .map-frame { aspect-ratio:16/10; min-height:205px; }
+  .route-launch { grid-template-columns:1fr; gap:12px; padding:13px 14px; }
+  .route-buttons { grid-template-columns:1fr 1fr; }
+}
+@media (max-width: 470px) {
+  .day-side { grid-template-columns:1fr; }
+  .route-buttons { grid-template-columns:1fr; }
+  .day-card-head .stat-chips { margin-left:0; }
+}
