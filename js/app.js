@@ -55,53 +55,6 @@ function wireImageFallbacks() {
   });
 }
 
-function pickAndUpload() {
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = "image/*";
-  input.multiple = true;
-  input.onchange = async () => {
-    const day = prompt("¿A qué día pertenecen estas fotos? (1, 2, 3 o 4)", "1") || "1";
-    let ok = 0;
-    let fail = 0;
-    for (const file of input.files) {
-      try {
-        await uploadPhoto(file, day);
-        ok++;
-      } catch (err) {
-        fail++;
-      }
-    }
-    if (fail === 0) {
-      alert("¡Fotos subidas! Ya las veréis los dos en Drive.");
-      if (CONFIG.driveFolderUrl) window.open(CONFIG.driveFolderUrl, "_blank", "noopener");
-    } else {
-      showToast(`Subidas ${ok} · con error ${fail}. Reintentad las que fallen.`);
-    }
-  };
-  input.click();
-}
-
-async function uploadPhoto(file, day) {
-  const dataUrl = await new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(r.result);
-    r.onerror = rej;
-    r.readAsDataURL(file);
-  });
-  const payload = {
-    image: dataUrl.split(",")[1],
-    contentType: file.type,
-    name: `dia${day}-${Date.now()}-${file.name.replace(/[^\w.\-]/g, "_")}`,
-    token: CONFIG.photoUploadToken,
-  };
-  const r = await fetch(CONFIG.photoUploadApi, {
-    method: "POST",
-    body: JSON.stringify(payload),
-  });
-  if (!r.ok) throw new Error("Error al subir " + file.name);
-}
-
 function wireCalendar() {
   document.querySelectorAll("[data-cal]").forEach((el) => {
     const day = CONFIG.days.find((d) => d.n === Number(el.dataset.cal));
