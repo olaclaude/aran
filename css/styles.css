@@ -1357,12 +1357,14 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
   display: flex;
   flex-direction: column;
 }
-.day > .day-head { order: 1; }
-.day > .stat-chips { order: 2; }
-.day > .weather-widget { order: 3; }
-.day > .visit-strip { order: 4; }
-.day > .day-grid { order: 5; }
-.day > .day-actions { order: 6; }
+.day > .day-card-head { order: 1; }
+.day > .weather-widget { order: 2; }
+.day > .day-toggle { order: 3; }
+.day > .day-content { order: 4; }
+.day > .route-card { order: 5; }
+.day > .visit-strip { order: 6; }
+.day > .day-grid { order: 7; }
+.day > .day-actions { order: 8; }
 
 .visit-strip {
   margin-top: 12px;
