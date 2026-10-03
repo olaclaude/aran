@@ -271,6 +271,8 @@ function renderWeather(data, target, dayIndex) {
     w.querySelector(".weather-min").textContent = Math.round(data.daily.temperature_2m_min[i]) + "°";
     w.querySelector(".weather-max").textContent = Math.round(data.daily.temperature_2m_max[i]) + "°";
     w.querySelector(".weather-rain").textContent = Math.round(data.daily.precipitation_probability_max[i]) + "%";
+    const gust = Number(data.daily.wind_gusts_10m_max?.[i]);
+    w.querySelector(".weather-gust").textContent = Number.isFinite(gust) ? Math.round(gust) + " km/h" : "—";
     renderRainPlan(data, w, dayIndex);
   });
 }
@@ -308,7 +310,7 @@ async function wireWeather() {
   if (!widgets.length) return;
   const url = "https://api.open-meteo.com/v1/forecast?latitude=" + WEATHER.lat +
     "&longitude=" + WEATHER.lon +
-    "&daily=weather_code,temperature_2m_min,temperature_2m_max,precipitation_probability_max" +
+    "&daily=weather_code,temperature_2m_min,temperature_2m_max,precipitation_probability_max,wind_gusts_10m_max" +
     "&timezone=" + encodeURIComponent(WEATHER.timezone) +
     "&start_date=2026-10-05&end_date=2026-10-08";
   try {
