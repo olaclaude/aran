@@ -2319,3 +2319,54 @@ html, body { overflow-x: clip; }
 .day-access-actions a { min-height: 46px; font-weight: 800; }
 .block-kicker { letter-spacing: .08em; }
 .factday { font-size: .9rem; opacity: .85; }
+
+/* ===== Estructura del día v2 ===== */
+.day .day-layout{display:flex;flex-direction:column;min-width:0}
+.day .day-aside{display:contents}
+.day .day-quick{order:2;margin:10px 12px 0;min-width:0}
+.day .day-quick>.block-kicker{display:block;margin:0 0 8px}
+.day .note-card{padding:12px;background:#fbfaf6}
+.day .note-card dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:0}
+.day .note-card dt,.day .note-card dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.day .note-card dt{margin-bottom:3px}
+.day .note-card dd{font-size:.84rem;line-height:1.35}
+.day .note-card dl{grid-auto-flow:row}
+.day .note-card dt:nth-of-type(1){grid-row:1;grid-column:1}.day .note-card dd:nth-of-type(1){grid-row:2;grid-column:1}
+.day .note-card dt:nth-of-type(2){grid-row:1;grid-column:2}.day .note-card dd:nth-of-type(2){grid-row:2;grid-column:2}
+.day .note-card dt:nth-of-type(3){grid-row:3;grid-column:1}.day .note-card dd:nth-of-type(3){grid-row:4;grid-column:1}
+.day .note-card dt:nth-of-type(4){grid-row:3;grid-column:2}.day .note-card dd:nth-of-type(4){grid-row:4;grid-column:2}
+.day .day-layout>.day-toggle{order:3}
+.day .day-layout>.day-content{order:4;display:flex;flex-direction:column;min-width:0;gap:10px;padding:10px 8px 0}
+.day .day-planning{min-width:0}
+.day .day-map-actions{min-width:0}
+.day .day-map-actions .map-card{width:100%;max-width:100%;min-width:0;margin:0;box-sizing:border-box}
+.day .day-map-actions .map-frame{width:100%;max-width:100%;min-width:0;box-sizing:border-box;aspect-ratio:16/10;min-height:205px}
+.day .day-route-actions{display:flex;flex-direction:column;gap:8px;margin-top:10px}
+.day .day-route-actions .route-buttons{display:grid;grid-template-columns:1fr;gap:8px}
+.day .day-route-actions .route-buttons a{min-width:0}
+.day .day-route-actions .calendar-link{display:flex;align-items:center;justify-content:center;gap:8px;min-height:46px}
+.day .day-layout>.factday{order:5;margin:12px 12px 16px}
+.day:not(.day-open) .day-layout>.day-content,.day:not(.day-open) .day-layout>.factday{display:none}
+.day .day-aside>.weather-widget{order:1;margin:0;border:0;border-bottom:1px solid var(--line);border-radius:0;box-shadow:none;background:#fbfaf6;padding:10px 12px;display:grid;grid-template-columns:1fr;gap:10px;min-width:0}
+.day .day-aside>.weather-widget .weather-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin:0}
+.day .day-aside>.weather-widget .weather-stats span{min-width:0}
+.day .day-aside>.weather-widget .weather-link{white-space:normal;overflow-wrap:anywhere}
+.day .day-aside>.weather-widget .rain-plan{min-width:0}
+@media(min-width:900px){
+ .day .day-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);column-gap:14px;align-items:start;padding:14px 16px 18px}
+ .day .day-aside{display:flex;flex-direction:column;gap:12px;grid-column:2;grid-row:1 / span 3;position:sticky;top:90px;min-width:0;align-self:start}
+ .day .day-aside>.weather-widget{order:0;border:1px solid var(--line);border-radius:14px;padding:12px}
+ .day .day-quick{order:0;margin:0}
+ .day .note-card dl{grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+ .day .note-card dt:nth-of-type(n),.day .note-card dd:nth-of-type(n){grid-row:auto;grid-column:auto}
+ .day .note-card dt:nth-of-type(1){grid-row:1;grid-column:1}.day .note-card dd:nth-of-type(1){grid-row:2;grid-column:1}
+ .day .note-card dt:nth-of-type(2){grid-row:1;grid-column:2}.day .note-card dd:nth-of-type(2){grid-row:2;grid-column:2}
+ .day .note-card dt:nth-of-type(3){grid-row:1;grid-column:3}.day .note-card dd:nth-of-type(3){grid-row:2;grid-column:3}
+ .day .note-card dt:nth-of-type(4){grid-row:1;grid-column:4}.day .note-card dd:nth-of-type(4){grid-row:2;grid-column:4}
+ .day .day-layout>.day-toggle{display:none}
+ .day .day-layout>.day-content{grid-column:1;grid-row:1;display:flex;padding:0;gap:0}
+ .day .day-map-actions{grid-column:2}
+ .day .day-layout>.factday{grid-column:1;grid-row:2;margin:10px 0 0}
+ .day:not(.day-open) .day-layout>.day-content,.day:not(.day-open) .day-layout>.factday{display:flex}
+ .day .day-aside>.weather-widget .weather-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
