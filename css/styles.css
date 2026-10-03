@@ -86,3 +86,18 @@ a:focus-visible,.btn:focus-visible{outline:3px solid #f3b66f;outline-offset:3px}
   .route-actions{grid-template-columns:1fr}
   .route-actions a:last-child{grid-column:auto}
 }
+
+/* ===== Weather ===== */
+.weather-widget{margin-top:14px;padding:14px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.72)}
+.weather-main{display:flex;align-items:center;gap:10px}
+.weather-icon{font-size:1.65rem}
+.weather-label{display:block;color:var(--muted);font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em}
+.weather-title{display:block;color:var(--green);margin-top:2px}
+.weather-stats{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:.82rem;color:var(--muted)}
+.weather-stats b{color:var(--ink)}
+.weather-link{display:inline-block;margin-top:11px;font-size:.78rem;font-weight:800;color:var(--green)}
+.weather-pretrip{margin-top:12px;padding:12px 14px;border-radius:10px;background:rgba(255,255,255,.1);color:#dce7e1;font-size:.85rem}
+.today-panel .weather-widget{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.16)}
+.today-panel .weather-label,.today-panel .weather-stats,.today-panel .weather-stats b{color:#dce7e1}
+.today-panel .weather-title{color:#fff}
+.today-panel .weather-link{color:#f1b05e}
