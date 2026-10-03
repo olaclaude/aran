@@ -338,32 +338,63 @@ async function wireWeather() {
   }
 }
 
-function wireQuickActions() {
+function wireDayAccess() {
   document.querySelectorAll(".day[id^=\"dia\"]").forEach((day) => {
-    const box = day.querySelector(".day-quick-actions");
-    if (!box) return;
-    box.innerHTML = "";
+    const content = day.querySelector(".day-content");
+    if (!content || content.querySelector(".day-access")) return;
+    const box = document.createElement("div");
+    box.className = "day-access";
+    box.innerHTML = '<div class="day-access-head"><span class="block-kicker">Accesos del día</span><strong>Todo lo necesario a mano</strong></div>';
+    const actions = document.createElement("div");
+    actions.className = "day-access-actions";
+
     const map = day.querySelector(".map-open");
-    const routeLinks = [...day.querySelectorAll(".route-buttons a")];
     if (map) {
       const a = document.createElement("a");
-      a.href = "#mapa-" + day.id;
-      a.className = "quick-link quick-map";
-      a.textContent = "Ver mapa";
-      box.appendChild(a);
-    }
-    routeLinks.forEach((source) => {
-      const a = document.createElement("a");
-      a.href = source.href;
-      a.className = "quick-link " + (source.classList.contains("is-drive") ? "quick-drive" : "quick-walk");
-      a.textContent = source.classList.contains("is-drive") ? "Cómo llegar" : "Wikiloc";
+      a.href = map.href;
+      a.className = "day-access-link is-map";
       a.target = "_blank";
       a.rel = "noopener";
-      box.appendChild(a);
-    });
+      a.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><span>Mapa</span>';
+      actions.appendChild(a);
+    }
+
+    const drive = day.querySelector(".route-buttons a.is-drive");
+    if (drive) {
+      const a = document.createElement("a");
+      a.href = drive.href;
+      a.className = "day-access-link is-drive";
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-car"/></svg><span>Cómo llegar</span>';
+      actions.appendChild(a);
+    }
+
+    const walk = day.querySelector(".route-buttons a.is-walk");
+    if (walk) {
+      const a = document.createElement("a");
+      a.href = walk.href;
+      a.className = "day-access-link is-walk";
+      a.target = "_blank";
+      a.rel = "noopener";
+      a.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-boot"/></svg><span>Wikiloc</span>';
+      actions.appendChild(a);
+    }
+
+    const cal = day.querySelector(".calendar-link");
+    if (cal) {
+      const a = document.createElement("a");
+      a.href = cal.href;
+      a.className = "day-access-link is-calendar";
+      a.innerHTML = '<svg class="ico" aria-hidden="true"><use href="#i-cal"/></svg><span>Calendario</span>';
+      a.dataset.cal = cal.dataset.cal || "";
+      actions.appendChild(a);
+    }
+
+    box.appendChild(actions);
+    content.insertBefore(box, content.firstElementChild);
   });
 }
-
 function wireDayToggles() {
   const days = [...document.querySelectorAll(".day[id^=\"dia\"]")];
   if (!days.length) return;
@@ -546,7 +577,7 @@ function wireChrome() {
 
 document.addEventListener("DOMContentLoaded", () => {
   wireCalendar();
-  wireQuickActions();
+  wireDayAccess();
   wireDayToggles();
   wireNav();
   wireToday();
