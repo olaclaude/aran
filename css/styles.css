@@ -2119,3 +2119,36 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
   .tabbar{display:grid !important;}
   body{padding-bottom:calc(74px + env(safe-area-inset-bottom));}
 }
+
+
+/* ===== Requested mobile travel actions / offline state ===== */
+.rain-plan{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 6px;margin-top:10px;padding:9px 10px;border-radius:12px;background:#fff3e7;border:1px solid #edcfb7;color:#6f4a34;font-size:.78rem;line-height:1.4}
+.rain-plan strong{color:#9a4e24}.rain-plan a{color:var(--pine);font-weight:800}
+.checklist{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.checkitem{padding:10px 11px;border:1px solid var(--line);border-radius:13px;background:#fff}
+.checkitem label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+.checkitem input{width:20px;height:20px;flex:none;margin:0;accent-color:var(--pine)}
+.checkitem input:checked + span{text-decoration:line-through;color:var(--muted)}
+.checkitem-links{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0 0 30px}
+.checkitem-links a{font-size:.74rem;padding:4px 7px;border-radius:8px;background:#f1ece3;color:var(--pine);font-weight:700;text-decoration:none}
+.offline-extra,.offline-emergency{display:flex;gap:8px;align-items:baseline;margin-top:10px;padding:10px 11px;border-radius:12px;background:#f4f7f4;border:1px solid #dce7df;font-size:.8rem}
+.offline-emergency{background:#fff4f0;border-color:#efd3c9}.offline-emergency strong{font-size:1.15rem;color:#a53d2c}
+.safety-section{margin:34px 0 18px}.safety-card{padding:18px}
+.safety-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}.safety-grid>div{padding:12px;border-radius:14px;background:#f7f3eb}.safety-grid strong,.safety-grid span{display:block}.safety-grid strong{color:var(--pine)}.safety-grid span{margin-top:3px;color:var(--muted);font-size:.84rem}
+.checkout-links{margin:16px 0;padding:14px;border-radius:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}.checkout-links .kicker{display:block;color:#d8e5de;margin-bottom:3px}.checkout-links p{margin:0 0 9px;color:#d8e5de}.checkout-links>div{display:flex;flex-wrap:wrap;gap:7px}.checkout-links a{color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:7px 9px;text-decoration:none;font-weight:700;font-size:.78rem}
+body.is-offline .map-frame iframe{display:none}
+body.is-offline .map-frame::after{content:"Sin conexión · usad el botón de Google Maps o el mapa descargado";min-height:160px;display:flex;align-items:center;justify-content:center;padding:20px;text-align:center;color:var(--muted);background:#f1eee8;font-size:.82rem}
+body.is-offline .map-lock{display:none}
+.mobile-action-bar{display:none}
+@media (hover:none) and (pointer:coarse){
+  body{padding-bottom:calc(136px + env(safe-area-inset-bottom))}
+  .tabbar{display:grid!important;position:fixed;left:0;right:0;bottom:0;z-index:80;grid-template-columns:repeat(4,1fr);gap:2px;padding:6px 8px calc(6px + env(safe-area-inset-bottom));background:rgba(255,253,249,.96);backdrop-filter:blur(16px);border-top:1px solid var(--line)}
+  .tabbar a,.tabbar button{appearance:none;border:0;background:transparent;color:var(--muted);font:700 .68rem/1.1 var(--sans);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:48px;text-decoration:none;border-radius:12px;padding:4px}
+  .tabbar .is-on{color:var(--pine);background:#efe7da}.tabbar .ico{width:20px;height:20px}
+  .mobile-action-bar{position:fixed;left:10px;right:10px;bottom:calc(76px + env(safe-area-inset-bottom));z-index:85;padding:7px;border-radius:15px;background:rgba(23,56,44,.98);box-shadow:0 10px 28px rgba(16,24,20,.24)}
+  .mobile-action-bar[hidden]{display:none}
+  .mobile-action-bar .mobile-route-buttons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .mobile-action-bar .mobile-route-buttons a{display:flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:8px 10px;border-radius:11px;color:#fff;background:#b56d45;text-decoration:none;font-weight:800;font-size:.8rem}
+  .mobile-action-bar .mobile-route-buttons a.is-drive{background:#fff;color:var(--pine)}.mobile-action-bar .mobile-route-buttons a.is-walk{background:#b56d45;color:#fff}.mobile-action-bar .ico{width:18px;height:18px}
+}
+@media (hover:none) and (pointer:coarse) and (max-width:470px){.safety-grid{grid-template-columns:1fr}.mobile-action-bar{left:8px;right:8px}}
