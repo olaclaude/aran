@@ -44,18 +44,63 @@ function wireUploads() {
       el.classList.add("needs-config");
     }
   });
-  if (!hasApi && !hasForm) showConfigBanner();
+  if (!hasApi && !hasForm) {
+    document.querySelectorAll("[data-upload]").forEach((el) => {
+      el.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        showToast("Las fotos compartidas todavía no están conectadas. Falta añadir un único enlace de Google Forms en la configuración.");
+      }, { once: false });
+    });
+  }
 }
 
-function showConfigBanner() {
-  const b = document.createElement("div");
-  b.style.cssText =
-    "position:fixed;left:12px;bottom:12px;z-index:99;background:#123a2c;color:#fff;" +
-    "padding:10px 16px;border-radius:12px;font-size:.85rem;box-shadow:0 4px 14px rgba(0,0,0,.3);max-width:320px";
-  b.innerHTML =
-    '📷 Falta el enlace del formulario de fotos.<br>Pégalo en <code>js/app.js</code> → <code>photosFormUrl</code> (ver README). ' +
-    '<a href="#" style="color:#f5c48a" onclick="this.closest(\'div\').remove();return false">✕</a>';
-  document.body.appendChild(b);
+function showToast(message) {
+  const old = document.querySelector(".toast");
+  if (old) old.remove();
+  const t = document.createElement("div");
+  t.className = "toast";
+  t.textContent = message;
+  document.body.appendChild(t);
+  window.setTimeout(() => t.remove(), 4200);
+}
+
+function wireToday() {
+  const button = document.querySelector("#todayButton");
+  const note = document.querySelector("#todayNote");
+  if (!button) return;
+  const now = new Date();
+  const date = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const start = new Date(2026, 9, 5);
+  const end = new Date(2026, 9, 8);
+  if (date < start) {
+    button.href = "#dia1";
+    button.textContent = "Ver Día 1 · llegada ↓";
+    if (note) note.textContent = "Faltan pocos días · 5–9 de octubre · base en Salardú";
+  } else if (date <= end) {
+    const day = date.getDate() - 4;
+    button.href = "#dia" + day;
+    button.textContent = "Ver el plan de hoy ↓";
+    if (note) note.textContent = "Hoy: Día " + day + " · abre el itinerario y sigue el ritmo tranquilo";
+  } else {
+    button.href = "#checkout";
+    button.textContent = "Ver continuación ↓";
+    if (note) note.textContent = "Desde el día 9 · check-out y continuación hasta el día 15";
+  }
+}
+
+function wireImageFallbacks() {
+  document.querySelectorAll(".photos img, .closestrip img").forEach((img) => {
+    img.addEventListener("error", () => {
+      const parent = img.parentElement;
+      if (!parent || parent.dataset.fallbackDone) return;
+      parent.dataset.fallbackDone = "1";
+      img.remove();
+      const ph = document.createElement("div");
+      ph.className = "photo-placeholder";
+      ph.textContent = "Foto pendiente de incorporar al proyecto";
+      parent.insertBefore(ph, parent.firstChild);
+    }, { once: true });
+  });
 }
 
 function pickAndUpload() {
