@@ -2129,7 +2129,10 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
 .checkitem label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
 .checkitem input{width:20px;height:20px;flex:none;margin:0;accent-color:var(--pine)}
 .checkitem input:checked + span{text-decoration:line-through;color:var(--muted)}
-.checkitem-links{display:flex;flex-wrap:wrap;gap:6px;margin:7px 0 0 30px}
+.checkitem{min-width:0}
+.checkitem label{min-width:0;width:100%}
+.checkitem label span{min-width:0}
+.checkitem-links{grid-column:1 / -1;display:flex;flex-wrap:wrap;gap:6px;margin:7px 0 0 30px}
 .checkitem-links a{font-size:.74rem;padding:4px 7px;border-radius:8px;background:#f1ece3;color:var(--pine);font-weight:700;text-decoration:none}
 .offline-extra,.offline-emergency{display:flex;gap:8px;align-items:baseline;margin-top:10px;padding:10px 11px;border-radius:12px;background:#f4f7f4;border:1px solid #dce7df;font-size:.8rem}
 .offline-emergency{background:#fff4f0;border-color:#efd3c9}.offline-emergency strong{font-size:1.15rem;color:#a53d2c}
