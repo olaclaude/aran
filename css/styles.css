@@ -1097,3 +1097,236 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
   a { text-decoration: underline; }
   .card, .day.is-today { break-inside: avoid; }
 }
+
+
+/* ===== Premium mobile refinement =====
+   Principio: menos bloques, una jerarquía clara y acciones compactas.
+   La guía debe sentirse como una app de viaje, no como una página larga. */
+:root {
+  --paper: #f4f2ed;
+  --card: #fffefa;
+  --line: #e2ddd3;
+  --radius: 20px;
+}
+
+@media (max-width: 760px) {
+  body { font-size: 1rem; line-height: 1.52; }
+  .wrap { padding-left: 16px; padding-right: 16px; }
+
+  /* Hero: imagen y contenido en una sola pieza, sin aire muerto. */
+  .hero {
+    min-height: 0;
+    padding: calc(28px + env(safe-area-inset-top)) 0 34px;
+    background-position: center center;
+  }
+  .hero .wrap { padding-left: 20px; padding-right: 20px; }
+  .seal { margin-bottom: 12px; font-size: .68rem; }
+  .hero h1 {
+    max-width: 9ch;
+    font-size: clamp(2.65rem, 12vw, 3.8rem);
+    line-height: .94;
+  }
+  .hero h1 span { font-size: .64em; }
+  .sub {
+    max-width: 31rem;
+    margin-top: 12px;
+    font-size: .98rem;
+    line-height: 1.45;
+  }
+  .chips { gap: 6px; margin-top: 14px; }
+  .chip { padding: 6px 9px; font-size: .74rem; }
+  .hero-actions {
+    display: flex;
+    gap: 8px;
+    margin-top: 18px;
+  }
+  .hero-actions .btn {
+    width: auto;
+    min-height: 44px;
+    padding: 10px 14px;
+    font-size: .88rem;
+  }
+  .hero-actions .btn.copper { flex: 1 1 auto; }
+  .hero-actions .btn.ghost {
+    flex: 0 0 auto;
+    border-color: rgba(255,255,255,.55);
+  }
+  .hero-note { margin-top: 9px; font-size: .82rem; }
+
+  /* The journey rail is navigation, not a collection of cards. */
+  .today-section {
+    margin-top: -22px;
+    padding-top: 0;
+  }
+  .today-panel {
+    border-radius: 22px;
+    padding: 19px 17px 16px;
+    box-shadow: 0 14px 32px rgba(16,32,26,.16);
+  }
+  .today-panel::before {
+    top: 18px;
+    bottom: 18px;
+    width: 2px;
+  }
+  .today-panel h2 {
+    font-size: clamp(1.65rem, 7vw, 2.15rem);
+    line-height: 1.02;
+  }
+  .today-summary { font-size: .93rem; line-height: 1.45; }
+  .today-steps { gap: 6px; margin-top: 14px; }
+  .trip-step {
+    grid-template-columns: 26px minmax(0,1fr) auto;
+    gap: 9px;
+    border-radius: 13px;
+    padding: 9px 10px;
+  }
+  .trip-step::before { width: 26px; height: 26px; font-size: .72rem; }
+  .trip-step span { font-size: .64rem; }
+  .trip-step strong { font-size: .9rem; }
+  .step-button {
+    min-height: 40px;
+    padding: 8px 10px;
+    border-radius: 10px;
+    font-size: .78rem;
+  }
+  .journey {
+    display: flex;
+    gap: 6px;
+    margin: 8px -16px 0;
+    padding: 0 16px 3px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .journey::-webkit-scrollbar { display: none; }
+  .journey a {
+    flex: 0 0 auto;
+    min-height: 48px;
+    min-width: 66px;
+    padding: 6px 9px;
+    border-radius: 12px;
+    box-shadow: none;
+    background: rgba(255,253,249,.92);
+  }
+  .journey b { font-size: 1.05rem; }
+  .journey span { font-size: .62rem; }
+
+  /* Sections breathe, but no oversized editorial gaps. */
+  section { padding: 30px 0 4px; }
+  section h2, .day-title h2 {
+    font-size: clamp(1.55rem, 6vw, 2rem);
+  }
+  .kicker { font-size: .66rem; letter-spacing: .12em; }
+  .lead { font-size: .92rem; line-height: 1.48; }
+
+  /* Offline is supporting information, not the main event. */
+  .offline-section { padding-top: 18px; }
+  .offline-card {
+    padding: 16px;
+    border-radius: 18px;
+    box-shadow: none;
+  }
+  .offline-card h2 { font-size: 1.35rem; }
+  .offline-card .lead { margin-top: 6px; }
+  .offline-list { margin-top: 12px; gap: 6px; }
+  .offline-list li {
+    grid-template-columns: 28px minmax(0,1fr) auto;
+    gap: 9px;
+    padding: 8px;
+    border-radius: 12px;
+  }
+  .pip { width: 28px; height: 28px; font-size: .72rem; }
+  .offline-list strong { font-size: .88rem; }
+  .offline-list li > div span { font-size: .72rem; }
+  .offline-list a {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: .78rem;
+  }
+  .offline-card .mini { font-size: .78rem; line-height: 1.4; }
+
+  /* Day header: reduce the magazine-style oversized number. */
+  .day { padding-top: 36px; }
+  .day-head { grid-template-columns: 36px minmax(0,1fr); gap: 10px; align-items: start; }
+  .day-index { font-size: 2.25rem; line-height: .95; padding-top: 4px; }
+  .day-date { margin: 5px 0 3px; font-size: .78rem; }
+  .day-badge { font-size: .64rem; padding: 4px 8px; }
+  .stat-chips { gap: 5px; margin-top: 10px; }
+  .stat {
+    padding: 5px 8px;
+    font-size: .72rem;
+    border-radius: 9px;
+  }
+
+  /* Route actions: two coherent actions, not giant tiles. */
+  .day-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7px;
+    margin-top: 12px;
+  }
+  .day-actions .route-label {
+    grid-column: 1 / -1;
+    margin-bottom: 1px;
+  }
+  .day-actions a.primary,
+  .day-actions a[data-cal] {
+    width: auto;
+    max-width: none;
+    flex: none;
+  }
+  .day-actions a.primary {
+    min-height: 48px;
+    padding: 8px 9px;
+    border-radius: 13px;
+    font-size: .8rem;
+  }
+  .day-actions a[data-cal] {
+    grid-column: 1 / -1;
+    justify-self: start;
+    min-height: 34px;
+    padding: 4px 2px;
+    border: 0;
+    color: var(--muted);
+    font-size: .76rem;
+    font-weight: 600;
+  }
+  .route-actions a svg.ico,
+  .route-actions a .ico {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px;
+    max-width: 20px;
+    flex: 0 0 20px;
+  }
+
+  .weather-widget {
+    margin-top: 10px;
+    padding: 11px;
+    border-radius: 14px;
+    box-shadow: none;
+  }
+  .weather-icon { width: 36px; height: 36px; font-size: 1.1rem; border-radius: 10px; }
+  .weather-title { font-size: .95rem; }
+  .weather-stats { gap: 5px; margin-top: 9px; }
+  .weather-stats span { padding: 6px 7px; font-size: .7rem; border-radius: 9px; }
+  .weather-stats b { font-size: 1.08rem; }
+
+  .day-grid { gap: 10px; margin-top: 12px; }
+  .card { padding: 15px; border-radius: 17px; box-shadow: none; }
+  .card h3 { font-size: 1.05rem; margin-bottom: 8px; }
+  .timeline li { padding-bottom: 12px; padding-left: 19px; }
+  .timeline .when { font-size: .66rem; }
+  .timeline .what { font-size: .91rem; }
+  .factday { margin-top: 12px; padding: 10px 12px; font-size: .84rem; }
+  .ficha { border-top-width: 3px; }
+  .ficha dl { gap: 7px 9px; font-size: .88rem; }
+  .ficha dt { font-size: .64rem; }
+  .ficha .mini { font-size: .78rem; }
+
+  .map-card { margin-top: 12px; }
+  .map-frame { min-height: 180px; border-radius: 13px; }
+  .map-card figcaption { font-size: .76rem; padding-top: 7px; }
+}
+
+/* Prevent stale browser styling from ever turning route icons into giant tiles. */
+.route-actions svg.ico { width: 20px; height: 20px; flex: 0 0 20px; }
