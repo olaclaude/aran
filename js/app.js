@@ -16,13 +16,13 @@ const CONFIG = {
       details: "Check-in en Salardú. Paseo circular Cami de les Bruixes (~2 km llano) y Salto de Tredós. Cena: Terrasseta dera Bruisha (Tredòs).",
       location: "Salardú, Naut Aran" },
     { n: 2, start: "20261006", end: "20261007", title: "Era Artiga de Lin y Arties",
-      details: "Parking Uelhs deth Joèu (pista desde Es Bòrdes). Circular 3 km · 90 m · 1 h 10. Tarde: Arties.",
+      details: "Era Artiga de Lin: recorrido circular muy sencillo de 2,5–3 km entre praderas verdes. Uelhs deth Joèu y tarde tranquila en Arties.",
       location: "Es Bòrdes / Artiga de Lin" },
     { n: 3, start: "20261007", end: "20261008", title: "Saut deth Pish y Vielha",
-      details: "Plan des Artiguetes (12 km de pista desde Pont d'Arròs). Paseo 1,2 km. Tarde en Vielha; cena Sidreria Era Bruisha (reserva).",
+      details: "Saut deth Pish: paseo de 1,5 km ida y vuelta y salto de 35 m. Tarde en Vielha; cena Sidreria Era Bruisha (reserva).",
       location: "Plan des Artiguetes / Vielha" },
     { n: 4, start: "20261008", end: "20261009", title: "Bassa d'Oles, Bagergue y Garòs",
-      details: "Parking Bassa d'Oles desde Gausac. Circular 1,2 km llano. Plan completo o relajado (Bassа + solo Bagergue).",
+      details: "Bassa d'Oles: circular llano de 1,2 km. Tarde en Bagergue y parada en Garòs; también podéis hacer versión relajada.",
       location: "Bassa d'Oles / Bagergue" },
   ],
 };
@@ -175,4 +175,6 @@ document.addEventListener("DOMContentLoaded", () => {
   wireUploads();
   wireCalendar();
   wireNav();
+  wireToday();
+  wireImageFallbacks();
 });
