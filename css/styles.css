@@ -1359,9 +1359,10 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
 }
 .day > .day-card-head { order: 1; }
 .day > .weather-widget { order: 2; }
-.day > .day-toggle { order: 3; }
-.day > .day-content { order: 4; }
-.day > .route-card { order: 5; }
+.day > .day-quick-actions { order: 3; }
+.day > .day-toggle { order: 4; }
+.day > .day-content { order: 5; }
+.day > .route-card { order: 6; }
 .day > .visit-strip { order: 6; }
 .day > .day-grid { order: 7; }
 .day > .day-actions { order: 8; }
@@ -2229,6 +2230,49 @@ body.is-offline .map-lock{display:none}
   }
 }
 
+
+/* ===== Quick daily actions ===== */
+.day-quick-actions{
+  order:3;
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  padding:10px 24px;
+  border-bottom:1px solid var(--line);
+  background:#fbfaf6;
+}
+.day-quick-actions .quick-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:7px 11px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff;
+  color:var(--pine);
+  font-size:.78rem;
+  font-weight:800;
+  text-decoration:none;
+}
+.day-quick-actions .quick-map{background:#f1ece3}
+.day-quick-actions .quick-drive{background:var(--pine);border-color:var(--pine);color:#fff}
+.day-quick-actions .quick-walk{background:#b56d45;border-color:#b56d45;color:#fff}
+
+@media (max-width:470px){
+  .day-quick-actions{
+    order:3;
+    padding:9px 12px;
+    gap:6px;
+  }
+  .day-quick-actions .quick-link{
+    flex:1 1 auto;
+    min-width:0;
+    min-height:40px;
+    padding:8px 9px;
+    font-size:.75rem;
+  }
+}
 
 /* ===== Collapsible daily itinerary ===== */
 .day-toggle{
