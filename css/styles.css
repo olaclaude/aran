@@ -2403,3 +2403,25 @@ html, body { overflow-x: clip; }
 .day > .day-card-head { order: -1; }
 /* Botón del alojamiento en su propia línea también en escritorio. */
 .arrival-drive { display: flex; align-items: center; gap: 7px; width: max-content; max-width: 100%; margin-top: 8px; box-sizing: border-box; }
+
+
+/* ===== Plan B reforzado para lluvia, frío y viento ===== */
+#planb .lead{max-width:72ch}
+.weather-levels{display:grid;gap:8px;margin:16px 0}
+.weather-level{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:start;padding:12px 13px;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.weather-level strong,.weather-level span{display:block}
+.weather-level strong{font-size:.8rem;color:var(--pine);letter-spacing:.04em}
+.weather-level div>span{margin-top:2px;color:var(--muted);font-size:.84rem;line-height:1.4}
+.level-dot{width:12px;height:12px;border-radius:50%;margin-top:4px;background:#8a9b8e;border:2px solid #fff;box-shadow:0 0 0 1px var(--line)}
+.level-orange .level-dot{background:#d88a3d}
+.level-red .level-dot{background:#b44b3d}
+.planb-grid{margin-top:10px}
+.gear-list{margin:0;padding-left:1.1rem}
+.gear-list li{margin:.32rem 0}
+.planb-decision{display:flex;flex-wrap:wrap;gap:4px 9px;margin-top:12px;padding:12px 13px;border-radius:14px;background:#f4f7f4;border:1px solid #dce7df;color:var(--muted);font-size:.86rem;line-height:1.45}
+.planb-decision strong{color:var(--pine)}
+@media(max-width:720px){
+  .weather-level{padding:11px 12px}
+  .weather-level div>span{font-size:.8rem}
+  .planb-grid{gap:10px}
+}
