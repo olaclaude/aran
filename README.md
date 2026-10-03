@@ -20,13 +20,11 @@ aran/
 ```
 
 Fuera del repositorio (binarios originales del proyecto, no versionados a propósito):
-`presentacion/Val_dAran_5-9_octubre.pptx` y las fotografías de `assets/photos/`.
+`presentacion/Val_dAran_5-9_octubre.pptx` y las fotografías originales.
 
 ## Web
 
-La web es HTML/CSS/JS estático y está preparada para GitHub Pages.
-
-En GitHub: **Settings → Pages → Deploy from a branch → main → /(root)**.
+La web es HTML/CSS/JS estático y se publica desde la rama `main` en Vercel. La URL de producción actual es `https://aran-blue.vercel.app`.
 
 ## Sin conexión (PWA)
 
@@ -36,7 +34,7 @@ primero desde la caché. `manifest.webmanifest` + `assets/icon.svg` permiten ins
 móvil desde el navegador («Añadir a pantalla de inicio»). Si cambias la lista de archivos
 precargados, sube la versión `CACHE` de `sw.js`.
 
-## Fotos de la galería
+## Fotos
 
 Las fotos ilustrativas de la web viven en `assets/photos/` con un nomenclador fijo
 (`cover.jpg`, `day1-1.jpg` … `day4-3.jpg`, `closing.jpg`). Mientras no existan, la web muestra
@@ -57,7 +55,7 @@ No pongas URLs privadas ni IDs sensibles de Drive en un repositorio público.
 
 ## Calendario
 
-Los botones de cada día generan enlaces de Google Calendar con las fechas del 5 al 8 de octubre de 2026.
+Los botones de cada día generan enlaces de Google Calendar con las fechas del 5 al 8 de octubre de 2026. La portada detecta automáticamente la fecha y abre el bloque «Hoy».
 
 ## Viaje
 
@@ -74,3 +72,11 @@ El repositorio se está preparando para que **Arena pueda trabajar directamente 
 
 Los mapas y la estructura web ya están dentro del repositorio. Las fotografías y el PPTX original son binarios personales: no se versionan ni se han sustituido por versiones inventadas; su hueco y nomenclador están documentados en `assets/photos/README.md`.
 
+
+
+## Flujo de uso en el viaje
+
+1. **Hoy / salida:** la portada muestra automáticamente qué toca y, antes del viaje, el botón directo de Google Maps desde Sant Feliu de Guíxols al alojamiento en Salardú.
+2. **Cada mañana:** después del desayuno, el bloque del día muestra primero **Ir al parking en coche** y después **Abrir Wikiloc · ruta**.
+3. **Sin cobertura:** la propia web queda disponible con la caché PWA. Los tracks de Wikiloc se deben guardar previamente en la app de Wikiloc como «Disponible offline» junto con el mapa offline de la zona.
+4. **No se descargan automáticamente tracks de terceros:** la web solo conserva los enlaces directos a las rutas seleccionadas.
