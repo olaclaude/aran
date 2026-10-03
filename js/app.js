@@ -120,6 +120,85 @@ function wireToday() {
   addStep(steps, "Viernes 9", "Check-out · decidir la continuación según tiempo y ganas", null);
 }
 
+
+const WEATHER = {
+  lat: 42.70,
+  lon: 0.90,
+  timezone: "Europe/Madrid",
+  days: ["2026-10-05","2026-10-06","2026-10-07","2026-10-08"]
+};
+
+function weatherIcon(code) {
+  if (code === 0) return "☀️";
+  if (code <= 3) return "⛅";
+  if (code <= 48) return "🌫️";
+  if (code <= 67) return "🌧️";
+  if (code <= 77) return "🌨️";
+  if (code <= 82) return "🌦️";
+  if (code <= 99) return "⛈️";
+  return "🌤️";
+}
+
+function weatherLabel(code) {
+  if (code === 0) return "Despejado";
+  if (code <= 3) return "Intervalos nubosos";
+  if (code <= 48) return "Nubes / niebla";
+  if (code <= 67) return "Lluvia";
+  if (code <= 77) return "Nieve";
+  if (code <= 82) return "Chubascos";
+  return "Tormenta";
+}
+
+function renderWeather(data, target, dayIndex) {
+  const date = WEATHER.days[dayIndex - 1];
+  const i = data.daily.time.indexOf(date);
+  if (i < 0) return;
+  const widgets = target ? [target] : [...document.querySelectorAll('.weather-widget[data-weather-day="' + dayIndex + '"]')];
+  widgets.forEach(w => {
+    w.querySelector(".weather-icon").textContent = weatherIcon(data.daily.weather_code[i]);
+    w.querySelector(".weather-title").textContent = weatherLabel(data.daily.weather_code[i]);
+    w.querySelector(".weather-min").textContent = Math.round(data.daily.temperature_2m_min[i]) + "°";
+    w.querySelector(".weather-max").textContent = Math.round(data.daily.temperature_2m_max[i]) + "°";
+    w.querySelector(".weather-rain").textContent = Math.round(data.daily.precipitation_probability_max[i]) + "%";
+  });
+}
+
+async function wireWeather() {
+  const widgets = [...document.querySelectorAll(".weather-widget")];
+  if (!widgets.length) return;
+  const url = "https://api.open-meteo.com/v1/forecast?latitude=" + WEATHER.lat +
+    "&longitude=" + WEATHER.lon +
+    "&daily=weather_code,temperature_2m_min,temperature_2m_max,precipitation_probability_max" +
+    "&timezone=" + encodeURIComponent(WEATHER.timezone) +
+    "&start_date=2026-10-05&end_date=2026-10-08";
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("weather");
+    const data = await res.json();
+    widgets.forEach(w => renderWeather(data, w, Number(w.dataset.weatherDay)));
+    const todayWeather = document.querySelector("#todayWeather");
+    if (todayWeather) {
+      const now = new Date();
+      const iso = now.toLocaleDateString("sv-SE", {timeZone: WEATHER.timezone});
+      const idx = WEATHER.days.indexOf(iso) + 1;
+      if (idx >= 1 && idx <= 4) {
+        const clone = widgets[idx - 1].cloneNode(true);
+        clone.removeAttribute("data-weather-day");
+        todayWeather.innerHTML = "";
+        todayWeather.appendChild(clone);
+        renderWeather(data, clone, idx);
+      } else if (iso === "2026-10-04") {
+        todayWeather.innerHTML = '<div class="weather-pretrip">Previsión del viaje disponible desde aquí para los días 5–8. Mañana empieza el Día 1.</div>';
+      }
+    }
+  } catch {
+    widgets.forEach(w => {
+      w.querySelector(".weather-title").textContent = "Consulta el tiempo antes de salir";
+      w.querySelector(".weather-rain").textContent = "—";
+    });
+  }
+}
+
 function wireCalendar() {
   document.querySelectorAll("[data-cal]").forEach((el) => {
     const day = CONFIG.days.find((d) => d.n === Number(el.dataset.cal));
@@ -163,5 +242,6 @@ document.addEventListener("DOMContentLoaded", () => {
   wireCalendar();
   wireNav();
   wireToday();
+  wireWeather();
   wireServiceWorker();
 });
