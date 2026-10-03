@@ -25,17 +25,17 @@
       <span class="chip">En el Fiat 500</span>
     </div>
     <div class="hero-actions">
-      <a class="btn" id="todayButton" href="#dia1">Ver el itinerario ↓</a>
+      <a class="btn" id="todayButton" href="#hoy">Abrir el plan de hoy ↓</a>
       <a class="btn outline" href="#mapa">Mapa del valle</a>
     </div>
-    <p class="hero-note" id="todayNote">Viaje: 5–9 de octubre · base en Salardú</p>
+    <p class="hero-note" id="todayNote">La guía se abre directamente en lo que toca hoy.</p>
   </div>
 </header>
 
 <!-- ================= NAV ================= -->
 <nav class="toc" id="toc">
   <ul>
-    <li><a href="#como">Cómo usar</a></li>
+    <li><a href="#hoy">Hoy</a></li><li><a href="#como">Cómo usar</a></li>
     <li><a href="#dia1">Día 1 · lun 5</a></li>
     <li><a href="#dia2">Día 2 · mar 6</a></li>
     <li><a href="#dia3">Día 3 · mié 7</a></li>
@@ -51,19 +51,45 @@
 
 <div class="wrap">
 
+<!-- ================= HOY ================= -->
+<section id="hoy" class="today-section">
+  <div class="today-panel" id="todayPanel">
+    <span class="kicker">Ahora</span>
+    <h2 id="todayTitle">Preparando el viaje</h2>
+    <p id="todaySummary" class="today-summary">Aquí aparecerá automáticamente lo que toca hoy.</p>
+    <div id="todaySteps" class="today-steps"></div>
+  </div>
+</section>
+
+<!-- ================= OFFLINE ================= -->
+<section id="offline" class="offline-section">
+  <div class="card offline-card">
+    <span class="kicker">Antes de salir</span>
+    <h2>Dejad las rutas listas offline</h2>
+    <p class="lead">La web guarda el planning, mapas y enlaces. Para tener el track real sin cobertura, abrid cada ruta en Wikiloc y guardadla como «Disponible offline» con Wi‑Fi antes de salir.</p>
+    <div class="offline-grid">
+      <a href="https://es.wikiloc.com/rutas-senderismo/cascada-tredos-camino-de-les-bruixes-228711408" target="_blank" rel="noopener">Día 1 · Wikiloc</a>
+      <a href="https://es.wikiloc.com/rutas-senderismo/uelhs-deth-joeu-saut-de-pomero-artiga-de-lin-circular-211891427" target="_blank" rel="noopener">Día 2 · Wikiloc</a>
+      <a href="https://es.wikiloc.com/rutas-senderismo/valle-de-varrados-saut-deth-pish-desde-plan-des-artiguetes-vall-daran-143766584" target="_blank" rel="noopener">Día 3 · Wikiloc</a>
+      <a href="https://es.wikiloc.com/rutas-senderismo/hormiguita-circular-bassa-d-oles-vall-d-aran-lleida-19853061" target="_blank" rel="noopener">Día 4 · Wikiloc</a>
+    </div>
+    <p class="mini">La web del viaje no puede descargar automáticamente los tracks de otros usuarios; preparadlos desde Wikiloc antes de salir.</p>
+  </div>
+</section>
+
 <!-- ================= CÓMO USAR ================= -->
 <section id="como">
   <span class="kicker">Didáctico y sin prisas</span>
   <h2>Cómo usar esta guía</h2>
-  <p class="lead">Cada día tiene su sección: qué toca, cómo se llega, cuánto se camina y enlaces directos a Google Maps y Wikiloc para seguir las rutas sin buscar nada.</p>
+  <p class="lead">La idea es muy simple: abrir la web, ver qué toca hoy, ir en coche al punto de salida y abrir Wikiloc para caminar.</p>
   <div class="howto">
     <div class="card"><span class="num">1</span><h3>Por la mañana</h3>
-      <p>Abre el día que toca: verás el plan (mañana → ducha → tarde), la ficha práctica y los enlaces directos.</p></div>
+      <p>La portada te lleva automáticamente al día que corresponde.</p></div>
     <div class="card"><span class="num">2</span><h3>En el coche</h3>
-      <p>Botón «Cómo llegar»: abre Google Maps con el itinerario completo desde Salardú. El mapa del día muestra el recorrido en color.</p></div>
+      <p>El botón verde <b>Ir en coche</b> abre Google Maps con la ruta ya preparada hasta el parking.</p></div>
     <div class="card"><span class="num">3</span><h3>En la ruta</h3>
-      <p>Usad el enlace de <b>Wikiloc</b> para abrir el track completo, consultar el recorrido, desnivel, fotos y mapa de la ruta.</p>
-      <p class="mini">Cada día tiene su enlace directo, sin búsquedas intermedias.</p></div>
+      <p>El botón <b>Wikiloc</b> abre directamente el track elegido para ese día.</p>
+      <p class="mini">Preparad las cuatro rutas offline antes de salir.</p></div>
   </div>
 </section>
 
@@ -77,11 +103,7 @@
   <div class="stat-chips">
     <span class="stat">≈ 2 km</span><span class="stat">circular llano</span><span class="stat">a pie desde la base</span>
   </div>
-  <div class="photos">
-    <figure><img src="assets/photos/day1-1.jpg" alt="Camin dera Bruisha" loading="lazy"><figcaption>Camin dera Bruisha</figcaption></figure>
-    <figure><img src="assets/photos/day1-2.jpg" alt="Salto de agua de Tredós" loading="lazy"><figcaption>Salto de agua de Tredós</figcaption></figure>
-    <figure><img src="assets/photos/day1-3.jpg" alt="Terrasseta dera Bruisha" loading="lazy"><figcaption>Cena: Terrasseta dera Bruisha</figcaption></figure>
-  </div>
+  
   <div class="day-grid">
     <div class="card">
       <h3>El plan del día</h3>
@@ -123,11 +145,7 @@
   <div class="stat-chips">
     <span class="stat">2,5–3 km</span><span class="stat">praderas verdes</span><span class="stat">casi sin esfuerzo</span>
   </div>
-  <div class="photos">
-    <figure><img src="assets/photos/day2-1.jpg" alt="Era Artiga de Lin" loading="lazy"><figcaption>Era Artiga de Lin</figcaption></figure>
-    <figure><img src="assets/photos/day2-2.jpg" alt="Uelhs deth Joèu" loading="lazy"><figcaption>Uelhs deth Joèu</figcaption></figure>
-    <figure><img src="assets/photos/day2-3.jpg" alt="Arties" loading="lazy"><figcaption>Tarde en Arties</figcaption></figure>
-  </div>
+  
   <div class="day-grid">
     <div class="card">
       <h3>El plan del día</h3>
@@ -170,11 +188,7 @@
   <div class="stat-chips">
     <span class="stat">1,2 km ida y vuelta</span><span class="stat">dos saltos · ≈25 m</span><span class="stat">dificultad baja</span><span class="stat">cascada emblemática</span>
   </div>
-  <div class="photos">
-    <figure><img src="assets/photos/day3-1.jpg" alt="Saut deth Pish" loading="lazy"><figcaption>Saut deth Pish</figcaption></figure>
-    <figure><img src="assets/photos/day3-2.jpg" alt="Vielha" loading="lazy"><figcaption>Vielha: paseo urbano</figcaption></figure>
-    <figure><img src="assets/photos/day3-3.jpg" alt="Vielha y el río Garona" loading="lazy"><figcaption>Vielha y el río Garona</figcaption></figure>
-  </div>
+  
   <div class="day-grid">
     <div class="card">
       <h3>El plan del día</h3>
@@ -217,11 +231,7 @@
   <div class="stat-chips">
     <span class="stat">1,2 km</span><span class="stat">circular llano</span><span class="stat">plan completo o relajado</span>
   </div>
-  <div class="photos">
-    <figure><img src="assets/photos/day4-1.jpg" alt="Bassa d'Oles" loading="lazy"><figcaption>Bassa d'Oles entre abetos</figcaption></figure>
-    <figure><img src="assets/photos/day4-2.jpg" alt="Bagergue" loading="lazy"><figcaption>Bagergue, el pueblo florido</figcaption></figure>
-    <figure><img src="assets/photos/day4-3.jpg" alt="Garòs" loading="lazy"><figcaption>Parada final en Garòs</figcaption></figure>
-  </div>
+  
   <div class="day-grid">
     <div class="card">
       <h3>El plan del día</h3>
@@ -261,7 +271,7 @@
   <p class="lead">Esquema orientativo, no a escala. Cada color es un día; Salardú ★ es vuestra base.</p>
   <div class="card map-card" style="margin-top:8px">
     <img src="assets/maps/general.svg" alt="Mapa esquemático del Val d'Aran con las cuatro rutas por día">
-    <figcaption>Las rutas oficiales con track están en cada día (botón «Ficha y track»).</figcaption>
+    <figcaption>Cada día tiene su recorrido en el mapa y su enlace directo a Wikiloc.</figcaption>
   </div>
   <div class="legend">
     <div class="item"><span class="dot" style="background:#2e6fd9"></span> Cascadas y naturaleza</div>
@@ -446,7 +456,7 @@
 </div><!-- /wrap -->
 
 <footer>
-  <p>Hecha a medida para nosotros · guía móvil del viaje</p>
+  <p>Guía móvil del viaje · abre la web y sigue el bloque «Hoy»</p>
   <p>La guía parte de nuestra presentación del viaje. Comprobad horarios y accesos el día anterior.</p>
 </footer>
 
