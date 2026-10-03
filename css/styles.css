@@ -1564,3 +1564,346 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
     justify-self: start;
   }
 }
+
+
+/* === Premium itinerary v3: visual day cards and explicit travel flow === */
+.day {
+  background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(247,244,237,.78));
+  border: 1px solid rgba(23,56,44,.12);
+  border-radius: 28px;
+  padding: 22px;
+  margin-top: 34px;
+  box-shadow: 0 12px 34px rgba(23,56,44,.065);
+  overflow: hidden;
+}
+.day::before { display:none; }
+.day-head {
+  display:grid;
+  grid-template-columns:52px minmax(0,1fr);
+  gap:14px;
+  align-items:start;
+  margin-bottom:0;
+}
+.day-index {
+  display:grid;
+  place-items:center;
+  width:52px;
+  height:52px;
+  padding:0;
+  border-radius:16px;
+  background:var(--pine);
+  color:#fff;
+  font-family:var(--display);
+  font-size:1.45rem;
+  line-height:1;
+}
+.day-badge {
+  background:#efe6d7;
+  color:#7d563d;
+  border:1px solid #e1d0b9;
+}
+.day-date { margin-top:7px; }
+.day-title h2 {
+  font-size:clamp(1.65rem,4vw,2.25rem);
+  letter-spacing:-.035em;
+  margin:3px 0 0;
+}
+.stat-chips { margin:14px 0 0; }
+.stat {
+  background:#f4f0e8;
+  border-color:#e3ddd1;
+}
+
+/* Weather becomes the compact utility panel immediately under the day identity. */
+.weather-widget {
+  margin-top:16px;
+  padding:14px;
+  border-radius:18px;
+  background:#eef4f0;
+  border:1px solid #d9e5de;
+  box-shadow:none;
+}
+.weather-main { min-height:42px; }
+.weather-icon { background:#fff; }
+.weather-title { color:var(--pine); }
+.weather-link { color:var(--pine); }
+
+/* Planning + visit + practical information form one visual dashboard. */
+.day-overview {
+  display:grid;
+  grid-template-columns:minmax(0,1.45fr) minmax(250px,.85fr);
+  gap:12px;
+  margin-top:12px;
+}
+.day-overview .card {
+  margin:0;
+  width:100%;
+}
+.plan-card {
+  border-top:3px solid #b56d45 !important;
+}
+.day-side {
+  display:grid;
+  gap:12px;
+  align-content:start;
+}
+.visit-card {
+  border-top:3px solid #17382c !important;
+}
+.note-card {
+  border-top:3px solid #c59a57 !important;
+}
+.block-kicker {
+  display:block;
+  margin-bottom:6px;
+  color:#9a765e;
+  font-size:.66rem;
+  line-height:1.1;
+  font-weight:800;
+  letter-spacing:.11em;
+  text-transform:uppercase;
+}
+.visit-card .block-kicker { color:var(--pine); }
+.note-card .block-kicker { color:#92723d; }
+.day-overview h3 {
+  font-size:1.12rem;
+  margin-bottom:10px;
+}
+.visit-list {
+  display:grid;
+  gap:7px;
+}
+.visit-list > div {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px;
+  align-items:center;
+  padding:10px 11px;
+  border-radius:12px;
+  background:#f5f2ec;
+  border:1px solid #e6e0d6;
+}
+.visit-list b { font-size:.86rem; }
+.visit-list span {
+  color:var(--muted);
+  font-size:.72rem;
+  text-align:right;
+}
+.note-card dl { margin-top:3px; }
+.note-card .mini { margin-top:11px; }
+
+/* Map is now a distinct step after the information dashboard. */
+.day-map {
+  margin:14px 0 0;
+  padding:0;
+  border:1px solid #d9ded9;
+  border-radius:20px;
+  overflow:hidden;
+  background:#fff;
+  box-shadow:0 7px 22px rgba(23,56,44,.06);
+}
+.map-heading {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:3px 12px;
+  align-items:end;
+  padding:14px 15px 12px;
+  background:#f1f4f1;
+  border-bottom:1px solid #dfe6e1;
+}
+.map-heading .block-kicker {
+  grid-column:1 / -1;
+  margin:0;
+  color:var(--pine);
+}
+.map-heading h3 {
+  margin:0;
+  font-size:1.05rem;
+}
+.map-heading > span:last-child {
+  color:var(--muted);
+  font-size:.74rem;
+  text-align:right;
+}
+.day-map .map-frame {
+  min-height:250px;
+  border-radius:0;
+}
+.day-map figcaption {
+  padding:10px 13px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+  background:#fff;
+  font-size:.75rem;
+}
+.map-open {
+  white-space:nowrap;
+  color:var(--pine);
+  font-weight:800;
+}
+
+/* Final hand-off: navigation and hiking track are deliberately separated by color and label. */
+.day-actions {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(190px,.65fr) minmax(190px,.65fr);
+  gap:9px;
+  margin-top:12px;
+  padding:13px;
+  border-radius:20px;
+  background:#17382c;
+  border:0;
+  color:#fff;
+}
+.day-actions .route-label {
+  grid-column:1 / -1;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:3px 9px;
+  align-items:baseline;
+  color:#fff;
+}
+.day-actions .route-label .block-kicker {
+  grid-column:1 / -1;
+  color:#b9cfc4;
+  margin:0;
+}
+.day-actions .route-label strong {
+  font-size:.92rem;
+}
+.day-actions .route-label > span:last-child {
+  color:#b9cfc4;
+  font-size:.73rem;
+}
+.day-actions a.primary {
+  min-height:50px;
+  border-radius:13px;
+  font-size:.82rem;
+  font-weight:800;
+  box-shadow:none;
+}
+.day-actions a.is-drive {
+  background:#fff;
+  color:var(--pine);
+}
+.day-actions a.is-walk {
+  background:#b56d45;
+  color:#fff;
+}
+.day-actions a[data-cal] {
+  grid-column:1 / -1;
+  justify-self:start;
+  color:#c8d7d0;
+  border:0;
+  padding:3px 0;
+  min-height:28px;
+  background:transparent;
+  font-size:.74rem;
+}
+.day-actions a[data-cal] .ico { width:17px !important; height:17px !important; }
+
+@media (max-width:759px) {
+  .day {
+    padding:16px;
+    margin-top:28px;
+    border-radius:22px;
+    box-shadow:0 8px 24px rgba(23,56,44,.055);
+  }
+  .day-head {
+    grid-template-columns:42px minmax(0,1fr);
+    gap:10px;
+  }
+  .day-index {
+    width:42px;
+    height:42px;
+    border-radius:13px;
+    font-size:1.15rem;
+  }
+  .day-title h2 {
+    font-size:clamp(1.45rem,6.3vw,1.9rem);
+    line-height:1.02;
+  }
+  .stat-chips {
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    scrollbar-width:none;
+    margin:11px -2px 0;
+    padding-bottom:1px;
+  }
+  .stat-chips::-webkit-scrollbar { display:none; }
+  .stat { flex:0 0 auto; }
+
+  .weather-widget {
+    margin-top:12px;
+    padding:11px;
+    border-radius:15px;
+  }
+  .weather-stats span { background:rgba(255,255,255,.78); }
+
+  .day-overview {
+    grid-template-columns:1fr;
+    gap:9px;
+    margin-top:10px;
+  }
+  .day-overview .card { padding:13px; }
+  .day-overview h3 { font-size:1.03rem; }
+  .visit-list { gap:5px; }
+  .visit-list > div { padding:9px; }
+
+  .day-map {
+    margin-top:10px;
+    border-radius:17px;
+  }
+  .map-heading {
+    grid-template-columns:1fr;
+    gap:4px;
+    padding:12px 12px 10px;
+  }
+  .map-heading > span:last-child {
+    text-align:left;
+    font-size:.72rem;
+  }
+  .day-map .map-frame { min-height:200px; }
+  .day-map figcaption {
+    align-items:flex-start;
+    flex-direction:column;
+    gap:4px;
+    padding:9px 11px 11px;
+  }
+  .map-open { font-size:.78rem; }
+
+  .day-actions {
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    margin-top:9px;
+    padding:11px;
+    border-radius:17px;
+  }
+  .day-actions .route-label {
+    display:block;
+    grid-column:1 / -1;
+  }
+  .day-actions .route-label strong {
+    display:block;
+    margin:2px 0 2px;
+    font-size:.9rem;
+  }
+  .day-actions .route-label > span:last-child {
+    display:block;
+  }
+  .day-actions a.primary {
+    min-height:47px;
+    padding:8px;
+    font-size:.77rem;
+  }
+  .day-actions a[data-cal] {
+    font-size:.72rem;
+  }
+}
+
+/* On desktop keep the day compact but let the planning dashboard breathe. */
+@media (min-width:760px) {
+  .day { padding:24px; }
+  .day-map .map-frame { min-height:290px; }
+}
