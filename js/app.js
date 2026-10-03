@@ -1,7 +1,5 @@
 /* Val d'Aran en calma — configuración y comportamiento */
 const CONFIG = {
-  // OPCIÓN A (recomendada): enlace de tu formulario de Google con subida de archivos.
-  // Crear en forms.google.com → Enviar → enlace. Ver README, paso 4.
   days: [
     { n: 1, start: "20261005", end: "20261006", title: "Llegada y Camin dera Bruisha",
       details: "Check-in en Salardú. Paseo circular Cami de les Bruixes (~2 km llano) y Salto de Tredós. Cena: Terrasseta dera Bruisha (Tredòs).",
