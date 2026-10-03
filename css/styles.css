@@ -2388,3 +2388,11 @@ html, body { overflow-x: clip; }
   }
   .journey a { scroll-snap-align:start; }
 }
+
+
+/* ===== Cabecera de días + chips ===== */
+.stat-chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-width:0}
+.stat-chips .stat{display:inline-flex;align-items:center;min-width:0;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:#fff;color:var(--pine);font:800 .74rem/1 var(--sans);white-space:normal;overflow-wrap:anywhere}
+@media (min-width:900px){.day-aside{position:sticky;top:84px;align-self:start}}
+@media (max-width:899px){.stat-chips{width:100%;max-width:100%;margin:0}.stat-chips .stat{flex:0 1 auto;max-width:100%}}
+@media (max-width:470px){.stat-chips{gap:6px;width:100%;overflow:visible;margin-left:0}.stat-chips .stat{max-width:100%;padding:6px 8px;font-size:.7rem}}
