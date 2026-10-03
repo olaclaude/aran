@@ -2055,3 +2055,60 @@ footer p { margin: 4px auto; max-width: 42rem; font-size: .92rem; }
 .calendar-link:hover{transform:translateY(-1px)}
 .weather-source{display:block;color:var(--muted);font-size:.72rem;line-height:1.2}
 @media (max-width:720px){.calendar-link{margin:0 14px 10px;font-size:.76rem}.weather-source{font-size:.7rem}}
+
+
+/* Compact FAQ: useful reference without taking space from the itinerary. */
+.faq-section{
+  margin:52px 0 20px;
+  padding:18px 0 6px;
+  border-top:1px solid var(--line);
+}
+.faq-head{max-width:720px;margin-bottom:12px}
+.faq-head h2{margin:3px 0 5px}
+.faq-list{
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  background:var(--card);
+}
+.faq-list details + details{border-top:1px solid var(--line)}
+.faq-list summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:13px 15px;
+  font-weight:700;
+  font-size:.9rem;
+  color:var(--pine);
+}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary::after{
+  content:"+";
+  flex:none;
+  width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:#f1ece3;
+  color:var(--pine);
+  font-size:1rem;
+  line-height:1;
+}
+.faq-list details[open] summary::after{content:"−"}
+.faq-list details p{
+  margin:0;
+  padding:0 15px 14px;
+  color:var(--muted);
+  font-size:.82rem;
+  line-height:1.55;
+}
+@media(max-width:720px){
+  .faq-section{margin-top:38px}
+  .faq-head .mini{font-size:.78rem}
+  .faq-list summary{padding:12px 13px;font-size:.84rem}
+  .faq-list details p{padding:0 13px 13px;font-size:.78rem}
+}
