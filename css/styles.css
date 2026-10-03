@@ -2403,3 +2403,10 @@ html, body { overflow-x: clip; }
 .day > .day-card-head { order: -1; }
 /* Botón del alojamiento en su propia línea también en escritorio. */
 .arrival-drive { display: flex; align-items: center; gap: 7px; width: max-content; max-width: 100%; margin-top: 8px; box-sizing: border-box; }
+
+
+/* ===== Navegación más fluida ===== */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
